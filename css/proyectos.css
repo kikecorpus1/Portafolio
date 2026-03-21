@@ -1,0 +1,62 @@
+/* Proyectos Section */
+
+#proyecto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+#proyecto .container {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#proyecto .container h2 {
+    width: 100%;
+}
+
+#proyecto .container img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.cuadro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    width: 300px;
+    height: auto;
+    gap: 1em;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cuadro:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cuadro p {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--color-principal);
+    margin: 0;
+}
+
+.cuadro button {
+    width: 100%;
+    padding: 10px;
+}

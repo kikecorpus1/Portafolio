@@ -1,0 +1,11 @@
+/* Footer Section */
+
+#contacto {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+    background-color: gainsboro;
+}

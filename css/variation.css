@@ -1,0 +1,13 @@
+:root{
+    --color-principal: #d7802f;
+    --color-secundario: #000000;
+    --font-color: white; 
+    --font-tittle: "";
+    --font-cuerpo: "";
+
+    --font-size-p: 1.25em;
+    --font-h1: 3.5em; 
+    --font-h2: 2.7em; 
+    --font-h3: 2em; 
+    --font-ul: none;
+}

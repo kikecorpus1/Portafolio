@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Corpus Dev</title>
+    <link rel="icon" type="image/png" href="../img/opcion3.png">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/contacto.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo-link"><img src="../img/opcion3.png" alt="Corpus Dev Logo" class="logo-img"></a>
+            <nav>
+                <a href="../index.html">Inicio</a>
+                <a href="./sobre_nosotros.html">Sobre Nosotros</a>
+                <a href="./servicios.html">Servicios</a>
+                <a href="./proyectos.html">Proyectos</a>
+                <a href="./contacto.html">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="contacto-section">
+        <div class="contacto-container">
+            <!-- Información de Contacto -->
+            <div class="contacto-info">
+                <div>
+                    <h2>¡Ponte en Contacto!</h2>
+                    <p>Me encanta colaborar y escuchar sobre nuevos proyectos. Siéntete libre de enviarme un mensaje a través del formulario o contáctame directamente.</p>
+                </div>
+
+                <div class="info-item">
+                    <strong>📧 Correo Electrónico</strong>
+                    <a href="mailto:corpus.dev@gmail.com">corpus.dev@gmail.com</a>
+                </div>
+
+                <div class="info-item">
+                    <strong>👤 Nombre</strong>
+                    <p>Enrique Corpus Bejarano</p>
+                </div>
+
+                <div class="info-item">
+                    <strong>💼 Profesión</strong>
+                    <p>Desarrollador de Software</p>
+                </div>
+
+                <div class="info-item">
+                    <strong>🌐 En línea</strong>
+                    <p>Disponible para consultas y proyectos</p>
+                </div>
+            </div>
+
+            <!-- Formulario de Contacto -->
+            <form class="formulario-contacto" action="https://formspree.io/f/mvzwyynv" method="POST">
+                <h2>Envía tu Mensaje</h2>
+
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo *</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo Electrónico *</label>
+                    <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="asunto">Asunto *</label>
+                    <input type="text" id="asunto" name="asunto" placeholder="¿Sobre qué es tu mensaje?" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">Mensaje *</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                </div>
+
+                <button type="submit" class="form-button">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <div class="container">
+            <div>
+                <p>© 2026 Corpus Dev - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="../script/script.js"></script>
+</body>
+</html>

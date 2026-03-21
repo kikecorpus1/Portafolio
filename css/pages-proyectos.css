@@ -1,0 +1,136 @@
+/* Proyectos Page Styles */
+
+#proyectos-section {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.proyectos-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.proyectos-header h1 {
+    font-size: 36px;
+    color: var(--color-principal);
+    margin-bottom: 15px;
+}
+
+.proyectos-header p {
+    font-size: 16px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.proyectos-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.proyecto-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 350px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.proyecto-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.proyecto-imagen {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background-color: #e0e0e0;
+}
+
+.proyecto-contenido {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+}
+
+.proyecto-titulo {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-principal);
+    margin: 0;
+}
+
+.proyecto-descripcion {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.proyecto-tecnologias {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.tech-badge {
+    background-color: var(--color-principal);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.proyecto-botones {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.btn-ver {
+    flex: 1;
+    padding: 10px;
+    background-color: var(--color-principal);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.btn-ver:hover {
+    background-color: var(--font-color);
+    color: var(--color-principal);
+}
+
+@media (max-width: 768px) {
+    .proyecto-card {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .proyectos-header h1 {
+        font-size: 28px;
+    }
+
+    .proyectos-container {
+        gap: 20px;
+    }
+}

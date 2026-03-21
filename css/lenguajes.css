@@ -1,0 +1,83 @@
+/* Lenguajes Section */
+
+#lenguajes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 60px 20px;
+    background-color: var(--color-secundario);
+    color: var(--font-color);
+}
+
+
+
+#lenguajes h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.lenguajes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.lenguaje-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    gap: 12px;
+    
+}
+
+.lenguaje-card:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.lenguaje-icon {
+    font-size: 40px;
+}
+
+.lenguaje-card p {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--color-principal);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .lenguajes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+    }
+
+    #lenguajes h2 {
+        font-size: 28px;
+    }
+
+    .lenguaje-card {
+        padding: 20px;
+    }
+
+    .lenguaje-icon {
+        font-size: 32px;
+    }
+
+    .lenguaje-card p {
+        font-size: 14px;
+    }
+}

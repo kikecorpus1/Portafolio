@@ -1,0 +1,48 @@
+/* Button Styles */
+
+.boton-primario,
+.boton-secundario {
+    padding: 14px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+.boton-primario {
+    background-color: var(--color-principal);
+    color: white;
+    box-shadow: 0 6px 20px rgba(215, 128, 47, 0.3);
+}
+
+.boton-primario:hover {
+    background-color: #e8941f;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(215, 128, 47, 0.5);
+}
+
+.boton-secundario {
+    background-color: transparent;
+    color: var(--font-color);
+    border: 2px solid var(--color-principal);
+    margin-left: 0;
+}
+
+.boton-secundario:hover {
+    background-color: var(--color-principal);
+    color: white;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .boton-secundario {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
