@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/pages-proyectos.css">
 </head>
-</head>
 <body>
     <header>
         <div class="container">
@@ -26,18 +25,115 @@
     <section id="proyectos-section">
         <div class="proyectos-header">
             <h1>Mis Proyectos</h1>
-            <p>Explora algunos de mis proyectos destacados donde aplico mis habilidades técnicas y experiencia en desarrollo.</p>
+            <p>Proyectos de backend, bases de datos y desarrollo web donde aplico Java, Spring Boot, MySQL, MongoDB y JavaScript.</p>
         </div>
 
         <div class="proyectos-container">
-            <!-- Proyecto 1: Juego de Poker -->
+
+            <!-- Proyecto 1: LogiTrack -->
+            <div class="proyecto-card">
+                <div class="proyecto-imagen" style="background-color: #1a1a2e; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+                    <span style="font-size:48px;">🏭</span>
+                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">Spring Boot · JWT · MySQL</span>
+                </div>
+                <div class="proyecto-contenido">
+                    <h3 class="proyecto-titulo">LogiTrack — Gestión de Bodegas</h3>
+                    <p class="proyecto-descripcion">
+                        Sistema backend para administración de bodegas con control de inventario, movimientos (entradas, salidas, traslados) y auditoría automática de cambios por usuario. Incluye autenticación JWT y roles de acceso.
+                    </p>
+                    <div class="proyecto-tecnologias">
+                        <span class="tech-badge">Spring Boot 3</span>
+                        <span class="tech-badge">Java 17</span>
+                        <span class="tech-badge">Spring Security</span>
+                        <span class="tech-badge">JWT</span>
+                        <span class="tech-badge">MySQL</span>
+                        <span class="tech-badge">Swagger</span>
+                    </div>
+                    <div class="proyecto-botones">
+                        <a href="https://github.com/kikecorpus1/GestionBodegas_SpringBoot" class="btn-ver" target="_blank">Ver Repositorio</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proyecto 2: TecnoStore -->
+            <div class="proyecto-card">
+                <div class="proyecto-imagen" style="background-color: #0d1117; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+                    <span style="font-size:48px;">📱</span>
+                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">Java · JDBC · MySQL</span>
+                </div>
+                <div class="proyecto-contenido">
+                    <h3 class="proyecto-titulo">TecnoStore — Gestión de Celulares</h3>
+                    <p class="proyecto-descripcion">
+                        Aplicación Java con conexión directa a MySQL que gestiona inventario, clientes, ventas y reportes. Implementa patrones de diseño Singleton, Prototype, Facade y DAO con Stream API y PreparedStatement.
+                    </p>
+                    <div class="proyecto-tecnologias">
+                        <span class="tech-badge">Java 25</span>
+                        <span class="tech-badge">JDBC</span>
+                        <span class="tech-badge">MySQL</span>
+                        <span class="tech-badge">Maven</span>
+                        <span class="tech-badge">DAO Pattern</span>
+                    </div>
+                    <div class="proyecto-botones">
+                        <a href="https://github.com/kikecorpus1/GestionVentaDeCelulares_Java" class="btn-ver" target="_blank">Ver Repositorio</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proyecto 3: Pizzería Don Piccolo -->
+            <div class="proyecto-card">
+                <div class="proyecto-imagen" style="background-color: #1a0a00; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+                    <span style="font-size:48px;">🍕</span>
+                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">MySQL · Triggers · Procedures</span>
+                </div>
+                <div class="proyecto-contenido">
+                    <h3 class="proyecto-titulo">Pizzería Don Piccolo — BD Relacional</h3>
+                    <p class="proyecto-descripcion">
+                        Base de datos MySQL que automatiza operaciones de una pizzería: pedidos, precios, domicilios y control financiero. Toda la lógica de negocio está en triggers encadenados, funciones almacenadas y procedimientos.
+                    </p>
+                    <div class="proyecto-tecnologias">
+                        <span class="tech-badge">MySQL 8</span>
+                        <span class="tech-badge">Triggers</span>
+                        <span class="tech-badge">Stored Procedures</span>
+                        <span class="tech-badge">Functions</span>
+                        <span class="tech-badge">Views</span>
+                    </div>
+                    <div class="proyecto-botones">
+                        <a href="https://github.com/kikecorpus1/PizzeriaDonPiccolo_MYSQL" class="btn-ver" target="_blank">Ver Repositorio</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proyecto 4: Campus Music -->
+            <div class="proyecto-card">
+                <div class="proyecto-imagen" style="background-color: #0a1a0a; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+                    <span style="font-size:48px;">🎵</span>
+                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">MongoDB · Aggregation · ACID</span>
+                </div>
+                <div class="proyecto-contenido">
+                    <h3 class="proyecto-titulo">Campus Music — BD NoSQL</h3>
+                    <p class="proyecto-descripcion">
+                        Sistema MongoDB para gestión de escuelas de música con validaciones JSON Schema, Aggregation Pipeline para reportes analíticos, transacciones ACID multi-documento y control de acceso por roles.
+                    </p>
+                    <div class="proyecto-tecnologias">
+                        <span class="tech-badge">MongoDB</span>
+                        <span class="tech-badge">Aggregation Pipeline</span>
+                        <span class="tech-badge">Transacciones ACID</span>
+                        <span class="tech-badge">JSON Schema</span>
+                        <span class="tech-badge">Roles</span>
+                    </div>
+                    <div class="proyecto-botones">
+                        <a href="https://github.com/kikecorpus1/CampusMusic_MongoDB" class="btn-ver" target="_blank">Ver Repositorio</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proyecto 5: Juego de Poker -->
             <div class="proyecto-card">
                 <img src="../img/poker.gif" alt="Juego de Poker" class="proyecto-imagen">
                 <div class="proyecto-contenido">
                     <h3 class="proyecto-titulo">Juego de Poker</h3>
                     <p class="proyecto-descripcion">
-                        Un juego de poker interactivo desarrollado con JavaScript vanilla. 
-                        Incluye mecánicas de juego, gestión de apuestas y lógica de manos de póker.
+                        Juego de poker interactivo con lógica completa de evaluación de manos, gestión de apuestas y flujo de partida implementado en JavaScript vanilla.
                     </p>
                     <div class="proyecto-tecnologias">
                         <span class="tech-badge">JavaScript</span>
@@ -50,14 +146,13 @@
                 </div>
             </div>
 
-            <!-- Proyecto 2: Pokédex -->
+            <!-- Proyecto 6: Buscador de Pokémon -->
             <div class="proyecto-card">
                 <img src="../img/pokemon.gif" alt="Buscador de Pokémon" class="proyecto-imagen">
                 <div class="proyecto-contenido">
                     <h3 class="proyecto-titulo">Buscador de Pokémon</h3>
                     <p class="proyecto-descripcion">
-                        Una aplicación interactiva que permite buscar y visualizar información 
-                        de diferentes Pokémon utilizando la API pública de Pokémon.
+                        Aplicación que consume la PokéAPI en tiempo real con filtros dinámicos, manejo de promesas y procesamiento de datos JSON asíncronos.
                     </p>
                     <div class="proyecto-tecnologias">
                         <span class="tech-badge">JavaScript</span>
@@ -69,17 +164,18 @@
                     </div>
                 </div>
             </div>
-                        <!-- Proyecto 3: Plataforma Lms -->
+
+            <!-- Proyecto 7: Plataforma LMS -->
             <div class="proyecto-card">
-                <img src="../img/PlataformaLMS.gif" alt="Plataforma Lms " class="proyecto-imagen">
+                <img src="../img/PlataformaLMS.gif" alt="Plataforma LMS" class="proyecto-imagen">
                 <div class="proyecto-contenido">
-                    <h3 class="proyecto-titulo">Plataforma Lms</h3>
+                    <h3 class="proyecto-titulo">Plataforma LMS</h3>
                     <p class="proyecto-descripcion">
-                        Academia SWBAR400 es un LMS funcional que permite gestionar cursos, docentes y estudiantes. Cuenta con tres roles de usuario diferenciados, cada uno con su propio panel y funcionalidades específicas.
+                        Academia SWBAR400 es un LMS funcional con gestión de cursos, docentes y estudiantes. Tres roles de usuario diferenciados, cada uno con su propio panel y funcionalidades específicas.
                     </p>
                     <div class="proyecto-tecnologias">
                         <span class="tech-badge">JavaScript</span>
-                        <span class="tech-badge">MOCKAPI</span>
+                        <span class="tech-badge">MockAPI</span>
                         <span class="tech-badge">CSS</span>
                     </div>
                     <div class="proyecto-botones">
@@ -87,6 +183,27 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Proyecto 8: Simulador de Gastos -->
+            <div class="proyecto-card">
+                <div class="proyecto-imagen" style="background-color: #0a0a1a; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+                    <span style="font-size:48px;">💰</span>
+                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">Python · Consola</span>
+                </div>
+                <div class="proyecto-contenido">
+                    <h3 class="proyecto-titulo">Simulador de Gastos Diarios</h3>
+                    <p class="proyecto-descripcion">
+                        Aplicación de consola en Python para registro y análisis de gastos personales diarios con categorías, resúmenes y reportes de balance.
+                    </p>
+                    <div class="proyecto-tecnologias">
+                        <span class="tech-badge">Python</span>
+                    </div>
+                    <div class="proyecto-botones">
+                        <a href="https://github.com/kikecorpus1/SimuladorDeGastosDiario_Python" class="btn-ver" target="_blank">Ver Repositorio</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
