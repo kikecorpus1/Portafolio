@@ -1,0 +1,338 @@
+:root {
+            --color-principal: #d7802f;
+            --color-secundario: #000000;
+            --font-color: white;
+        }
+ 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #111; font-family: 'Syne', sans-serif; }
+ 
+        /* =========================================================
+           SECCIÓN PRINCIPAL
+        ========================================================= */
+        #habitos-section {
+            position: relative;
+            background: #0a0a0a;
+            overflow: hidden;
+            padding: 100px 20px;
+        }
+ 
+        /* Fondo con patrón de grid tipo código */
+        #habitos-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(215,128,47,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(215,128,47,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+ 
+        /* Orbe decorativo naranja */
+        #habitos-section::after {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(215,128,47,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+ 
+        .habitos-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+ 
+        /* =========================================================
+           ENCABEZADO
+        ========================================================= */
+        .habitos-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+            margin-bottom: 70px;
+        }
+ 
+        .habitos-badge {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--color-principal);
+            border: 1px solid rgba(215,128,47,0.4);
+            padding: 6px 14px;
+            border-radius: 2px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+ 
+        .habitos-titulo-bloque {
+            flex: 0 0 45%;
+        }
+ 
+        .habitos-titulo {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            color: white;
+            line-height: 1.05;
+            letter-spacing: -1px;
+        }
+ 
+        .habitos-titulo span {
+            color: var(--color-principal);
+            display: block;
+        }
+ 
+        .habitos-linea {
+            width: 60px;
+            height: 3px;
+            background: var(--color-principal);
+            margin: 24px 0;
+        }
+ 
+        .habitos-tag-tipo {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+        }
+ 
+        .habitos-desc-bloque {
+            flex: 1;
+            padding-top: 55px;
+        }
+ 
+        .habitos-desc {
+            font-size: 16px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+ 
+        .habitos-objetivo {
+            background: rgba(215,128,47,0.08);
+            border-left: 3px solid var(--color-principal);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.7;
+            font-style: italic;
+        }
+ 
+        /* =========================================================
+           STATS ROW
+        ========================================================= */
+        .habitos-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(215,128,47,0.15);
+            border: 1px solid rgba(215,128,47,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+ 
+        .stat-item {
+            background: #0f0f0f;
+            padding: 32px 24px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+ 
+        .stat-item:hover {
+            background: rgba(215,128,47,0.06);
+        }
+ 
+        .stat-numero {
+            font-family: 'Space Mono', monospace;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--color-principal);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+ 
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+ 
+        /* =========================================================
+           SESIONES GRID
+        ========================================================= */
+        .habitos-sesiones-titulo {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+ 
+        .sesiones-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 60px;
+        }
+ 
+        .sesion-item {
+            background: #141414;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 18px 16px;
+            transition: all 0.3s;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        .sesion-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(215,128,47,0.06), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+ 
+        .sesion-item:hover {
+            border-color: rgba(215,128,47,0.35);
+            transform: translateY(-3px);
+        }
+ 
+        .sesion-item:hover::before {
+            opacity: 1;
+        }
+ 
+        .sesion-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: rgba(215,128,47,0.5);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+ 
+        .sesion-nombre {
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+            font-weight: 600;
+            line-height: 1.4;
+        }
+ 
+        /* =========================================================
+           BENEFICIOS
+        ========================================================= */
+        .habitos-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+ 
+        .beneficios-titulo {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+ 
+        .beneficios-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+ 
+        .beneficio-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: #141414;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.04);
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            transition: all 0.25s;
+        }
+ 
+        .beneficio-item:hover {
+            border-color: rgba(215,128,47,0.3);
+            color: white;
+            transform: translateX(6px);
+        }
+ 
+        .beneficio-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-principal);
+            flex-shrink: 0;
+        }
+ 
+        /* Bloque metodología */
+        .metodologia-box {
+            background: linear-gradient(135deg, rgba(215,128,47,0.1), rgba(215,128,47,0.03));
+            border: 1px solid rgba(215,128,47,0.2);
+            border-radius: 12px;
+            padding: 36px 30px;
+        }
+ 
+        .metodologia-box h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+ 
+        .metodologia-box p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+ 
+        .metodologia-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+ 
+        .met-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            background: rgba(215,128,47,0.15);
+            color: var(--color-principal);
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(215,128,47,0.25);
+        }
+ 
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+        @media (max-width: 900px) {
+            .habitos-top { flex-direction: column; gap: 30px; }
+            .habitos-titulo-bloque { flex: none; }
+            .habitos-desc-bloque { padding-top: 0; }
+            .habitos-stats { grid-template-columns: repeat(2, 1fr); }
+            .sesiones-grid { grid-template-columns: repeat(2, 1fr); }
+            .habitos-bottom { grid-template-columns: 1fr; }
+        }
+ 
+        @media (max-width: 480px) {
+            .sesiones-grid { grid-template-columns: 1fr; }
+            .stat-numero { font-size: 32px; }
+        }
