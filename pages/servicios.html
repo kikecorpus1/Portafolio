@@ -3,131 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios - Corpus Dev</title>
+    <title>Servicios — Corpus Dev</title>
     <link rel="icon" type="image/png" href="../img/opcion3.png">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/servicios.css">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --naranja: #d7802f;
+            --naranja-vivo: #f09040;
+            --negro: #080808;
+            --gris-oscuro: #111111;
+            --gris-mid: #1a1a1a;
+            --gris-borde: rgba(255,255,255,0.08);
+            --blanco: #ffffff;
+            --font-display: 'Syne', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--negro); color: var(--blanco); font-family: var(--font-display); overflow-x: hidden; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+        /* HEADER */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 0 40px; height: 70px;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(8,8,8,0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gris-borde);
+        }
+        .logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 40px; width: auto; filter: drop-shadow(0 0 8px rgba(215,128,47,0.4)); transition: filter 0.3s; }
+        .logo-img:hover { filter: drop-shadow(0 0 14px rgba(215,128,47,0.8)); }
+        .logo-texto { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--naranja); letter-spacing: 2px; }
+        header nav { display: flex; align-items: center; gap: 4px; }
+        header nav a {
+            font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+            color: rgba(255,255,255,0.5); text-decoration: none;
+            padding: 8px 14px; border-radius: 6px; letter-spacing: 1px;
+            text-transform: uppercase; transition: color 0.2s, background 0.2s;
+        }
+        header nav a:hover { color: var(--naranja); background: rgba(215,128,47,0.08); }
+        header nav a.active { color: var(--naranja); }
+
+        /* HERO */
+        .page-hero {
+            min-height: 55vh;
+            display: flex; align-items: flex-end;
+            padding: 0 0 60px;
+            position: relative; overflow: hidden;
+            background-image:
+                linear-gradient(135deg, rgba(0,0,0,0.80), rgba(0,0,0,0.60)),
+                url(../img/pausaActiva.jpeg);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+        .page-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(215,128,47,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(215,128,47,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .hero-inner { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; }
+        .hero-badge {
+            font-family: var(--font-mono); font-size: 11px;
+            color: var(--naranja); letter-spacing: 3px; text-transform: uppercase;
+            border: 1px solid rgba(215,128,47,0.35); padding: 6px 14px;
+            border-radius: 2px; display: inline-block; margin-bottom: 20px;
+        }
+        .page-hero h1 { font-size: clamp(40px, 7vw, 80px); font-weight: 800; letter-spacing: -2px; line-height: 1; }
+        .page-hero h1 span { color: var(--naranja); }
+        .page-hero p { font-size: 16px; color: rgba(255,255,255,0.55); margin-top: 16px; max-width: 540px; line-height: 1.7; }
+
+        /* SERVICIOS */
+        .servicios-body { padding: 80px 0 100px; }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .servicio-card {
+            background: var(--gris-mid);
+            border: 1px solid var(--gris-borde);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex; flex-direction: column;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .servicio-card:hover {
+            border-color: rgba(215,128,47,0.35);
+            transform: translateY(-6px);
+        }
+
+        .serv-header {
+            padding: 32px 32px 24px;
+            border-bottom: 1px solid var(--gris-borde);
+            display: flex; align-items: flex-start; gap: 20px;
+        }
+
+        .serv-num {
+            font-family: var(--font-mono); font-size: 11px;
+            color: var(--naranja); opacity: 0.6;
+            letter-spacing: 2px; padding-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .serv-header-text { flex: 1; }
+
+        .serv-titulo {
+            font-size: 20px; font-weight: 800;
+            color: var(--blanco); margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .serv-desc {
+            font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7;
+        }
+
+        .serv-body { padding: 24px 32px 28px; flex: 1; display: flex; flex-direction: column; gap: 20px; }
+
+        .serv-lista { display: flex; flex-direction: column; gap: 10px; }
+
+        .serv-item {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 13px; color: rgba(255,255,255,0.7);
+        }
+
+        .serv-item::before {
+            content: '';
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--naranja); flex-shrink: 0; opacity: 0.7;
+        }
+
+        .serv-cta {
+            margin-top: auto;
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+            text-decoration: none; color: var(--naranja);
+            border: 1px solid rgba(215,128,47,0.35);
+            padding: 10px 20px; border-radius: 6px; width: fit-content;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .serv-cta:hover { background: var(--naranja); color: white; }
+
+        /* CTA BOTTOM */
+        .cta-bottom {
+            margin-top: 60px;
+            background: var(--gris-mid);
+            border: 1px solid var(--gris-borde);
+            border-radius: 14px;
+            padding: 48px;
+            display: flex; align-items: center; justify-content: space-between; gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .cta-bottom h3 { font-size: clamp(20px, 3vw, 28px); font-weight: 800; letter-spacing: -0.5px; }
+        .cta-bottom p { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 8px; max-width: 500px; }
+
+        .btn-primary {
+            background: var(--naranja); color: #fff;
+            font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+            padding: 14px 32px; border-radius: 6px; border: none; cursor: pointer;
+            transition: background 0.2s, transform 0.2s; white-space: nowrap;
+            box-shadow: 0 6px 24px rgba(215,128,47,0.25);
+        }
+
+        .btn-primary:hover { background: var(--naranja-vivo); transform: translateY(-3px); }
+
+        /* FOOTER */
+        #footer {
+            background: var(--gris-oscuro); border-top: 1px solid var(--gris-borde);
+            padding: 48px 32px; display: flex; align-items: center; justify-content: center;
+        }
+        #footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-info { display: flex; flex-direction: column; gap: 4px; }
+        .footer-info h3 { font-size: 18px; font-weight: 700; }
+        .footer-info a { font-family: var(--font-mono); font-size: 12px; color: var(--naranja); text-decoration: none; }
+        .footer-info p { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.3); }
+        .footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+
+        @media (max-width: 800px) {
+            .servicios-grid { grid-template-columns: 1fr; }
+            .cta-bottom { flex-direction: column; align-items: flex-start; }
+            header { padding: 0 20px; }
+        }
+    </style>
 </head>
 <body>
+
     <header>
-        <div class="container">
-            <a href="../index.html" class="logo-link"><img src="../img/opcion3.png" alt="Corpus Dev Logo" class="logo-img"></a>
-            <nav>
-                <a href="../index.html">Inicio</a>
-                <a href="./sobre_nosotros.html">Sobre Nosotros</a>
-                <a href="./servicios.html">Servicios</a>
-                <a href="./proyectos.html">Proyectos</a>
-                <a href="./contacto.html">Contacto</a>
-            </nav>
-        </div>
+        <a href="../index.html" class="logo-link">
+            <img src="../img/opcion3.png" alt="Corpus Dev Logo" class="logo-img">
+            <span class="logo-texto">CORPUS DEV</span>
+        </a>
+        <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="./sobre_nosotros.html">Sobre Mí</a>
+            <a href="./servicios.html" class="active">Servicios</a>
+            <a href="./proyectos.html">Proyectos</a>
+            <a href="./contacto.html">Contacto</a>
+        </nav>
     </header>
 
-    <section id="servicios-section">
-        <div class="servicios-header">
-            <h1>Mis Servicios</h1>
-            <p>Ofrezco soluciones profesionales de desarrollo de software adaptadas a tus necesidades específicas.</p>
-        </div>
-
-        <div class="servicios-container">
-            <!-- Servicio 1: Desarrollo de Aplicativos Web -->
-            <div class="servicio-card">
-                <div class="servicio-header">
-                    <span class="servicio-icono">🚀</span>
-                    <h3 class="servicio-titulo">Desarrollo de Aplicativos Web</h3>
-                </div>
-                <div class="servicio-contenido">
-                    <p class="servicio-descripcion">
-                        Desarrollo de aplicaciones web dinámicas y escalables utilizando las últimas tecnologías y mejores prácticas.
-                    </p>
-                    <div class="servicio-detalles">
-                        <ul>
-                            <li>✓ Frontend moderno e interactivo</li>
-                            <li>✓ Backend robusto y seguro</li>
-                            <li>✓ Bases de datos optimizadas</li>
-                            <li>✓ Responsive design</li>
-                        </ul>
-                    </div>
-                    <a href="./contacto.html" class="servicio-boton">Solicitar Servicio</a>
-                </div>
-            </div>
-
-            <!-- Servicio 2: Desarrollo de Páginas Web -->
-            <div class="servicio-card">
-                <div class="servicio-header">
-                    <span class="servicio-icono">🌐</span>
-                    <h3 class="servicio-titulo">Desarrollo de Páginas Web</h3>
-                </div>
-                <div class="servicio-contenido">
-                    <p class="servicio-descripcion">
-                        Creación de sitios web profesionales, modernos y optimizados para SEO que representen tu marca.
-                    </p>
-                    <div class="servicio-detalles">
-                        <ul>
-                            <li>✓ Diseño personalizado</li>
-                            <li>✓ Optimización SEO</li>
-                            <li>✓ Mobile friendly</li>
-                            <li>✓ Rápida carga</li>
-                        </ul>
-                    </div>
-                    <a href="./contacto.html" class="servicio-boton">Solicitar Servicio</a>
-                </div>
-            </div>
-
-            <!-- Servicio 3: Programas de Escritorio -->
-            <div class="servicio-card">
-                <div class="servicio-header">
-                    <span class="servicio-icono">💻</span>
-                    <h3 class="servicio-titulo">Programas de Escritorio</h3>
-                </div>
-                <div class="servicio-contenido">
-                    <p class="servicio-descripcion">
-                        Desarrollo de aplicaciones de escritorio robustas y eficientes adaptadas a tus requerimientos específicos.
-                    </p>
-                    <div class="servicio-detalles">
-                        <ul>
-                            <li>✓ Interfaz intuitiva</li>
-                            <li>✓ Rendimiento óptimo</li>
-                            <li>✓ Multiplataforma</li>
-                            <li>✓ Mantenimiento continuo</li>
-                        </ul>
-                    </div>
-                    <a href="./contacto.html" class="servicio-boton">Solicitar Servicio</a>
-                </div>
-            </div>
-
-            <!-- Servicio 4: Soporte en Desarrollo -->
-            <div class="servicio-card">
-                <div class="servicio-header">
-                    <span class="servicio-icono">🛠️</span>
-                    <h3 class="servicio-titulo">Soporte en Desarrollo</h3>
-                </div>
-                <div class="servicio-contenido">
-                    <p class="servicio-descripcion">
-                        Consultoría técnica y soporte especializado para proyectos en desarrollo o mantenimiento existente.
-                    </p>
-                    <div class="servicio-detalles">
-                        <ul>
-                            <li>✓ Revisión de código</li>
-                            <li>✓ Debugging y optimización</li>
-                            <li>✓ Asesoría técnica</li>
-                            <li>✓ Soporte continuo</li>
-                        </ul>
-                    </div>
-                    <a href="./contacto.html" class="servicio-boton">Solicitar Servicio</a>
-                </div>
-            </div>
+    <section class="page-hero">
+        <div class="hero-inner">
+            <span class="hero-badge">// Servicios</span>
+            <h1>Lo que puedo<br><span>hacer por ti.</span></h1>
+            <p>Soluciones de software adaptadas a tus necesidades, desde aplicaciones web hasta sistemas backend robustos.</p>
         </div>
     </section>
 
-    <section id="contacto">
+    <section class="servicios-body">
         <div class="container">
-            <div>
-                <p>© 2026 Corpus Dev - Todos los derechos reservados</p>
+            <div class="servicios-grid">
+
+                <div class="servicio-card">
+                    <div class="serv-header">
+                        <span class="serv-num">01</span>
+                        <div class="serv-header-text">
+                            <h3 class="serv-titulo">Desarrollo de Aplicativos Web</h3>
+                            <p class="serv-desc">Aplicaciones web dinámicas y escalables con las últimas tecnologías y mejores prácticas del sector.</p>
+                        </div>
+                    </div>
+                    <div class="serv-body">
+                        <div class="serv-lista">
+                            <span class="serv-item">Frontend moderno e interactivo</span>
+                            <span class="serv-item">Backend robusto y seguro (Spring Boot / Java)</span>
+                            <span class="serv-item">Bases de datos optimizadas (MySQL / MongoDB)</span>
+                            <span class="serv-item">Autenticación JWT y control de acceso por roles</span>
+                            <span class="serv-item">Documentación con Swagger</span>
+                        </div>
+                        <a href="./contacto.html" class="serv-cta">Solicitar →</a>
+                    </div>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="serv-header">
+                        <span class="serv-num">02</span>
+                        <div class="serv-header-text">
+                            <h3 class="serv-titulo">Desarrollo de Páginas Web</h3>
+                            <p class="serv-desc">Sitios web profesionales, modernos y optimizados para SEO que representan tu marca con fuerza.</p>
+                        </div>
+                    </div>
+                    <div class="serv-body">
+                        <div class="serv-lista">
+                            <span class="serv-item">Diseño personalizado y atractivo</span>
+                            <span class="serv-item">Optimización SEO desde la base</span>
+                            <span class="serv-item">Responsive — perfecto en móvil y desktop</span>
+                            <span class="serv-item">Carga rápida y rendimiento optimizado</span>
+                            <span class="serv-item">Formularios de contacto funcionales</span>
+                        </div>
+                        <a href="./contacto.html" class="serv-cta">Solicitar →</a>
+                    </div>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="serv-header">
+                        <span class="serv-num">03</span>
+                        <div class="serv-header-text">
+                            <h3 class="serv-titulo">Programas de Escritorio</h3>
+                            <p class="serv-desc">Aplicaciones de escritorio robustas y eficientes adaptadas a requerimientos específicos de negocio.</p>
+                        </div>
+                    </div>
+                    <div class="serv-body">
+                        <div class="serv-lista">
+                            <span class="serv-item">Interfaz de usuario intuitiva</span>
+                            <span class="serv-item">Rendimiento y estabilidad óptimos</span>
+                            <span class="serv-item">Conexión a bases de datos locales o remotas</span>
+                            <span class="serv-item">Mantenimiento y actualizaciones continuas</span>
+                        </div>
+                        <a href="./contacto.html" class="serv-cta">Solicitar →</a>
+                    </div>
+                </div>
+
+                <div class="servicio-card">
+                    <div class="serv-header">
+                        <span class="serv-num">04</span>
+                        <div class="serv-header-text">
+                            <h3 class="serv-titulo">Soporte en Desarrollo</h3>
+                            <p class="serv-desc">Consultoría técnica y soporte especializado para proyectos en desarrollo o sistemas ya existentes.</p>
+                        </div>
+                    </div>
+                    <div class="serv-body">
+                        <div class="serv-lista">
+                            <span class="serv-item">Revisión y refactorización de código</span>
+                            <span class="serv-item">Debugging y corrección de errores</span>
+                            <span class="serv-item">Asesoría técnica y arquitectura</span>
+                            <span class="serv-item">Optimización de consultas SQL / NoSQL</span>
+                            <span class="serv-item">Soporte continuo post-entrega</span>
+                        </div>
+                        <a href="./contacto.html" class="serv-cta">Solicitar →</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-bottom">
+                <div>
+                    <h3>¿Tienes un proyecto en mente?</h3>
+                    <p>Cuéntame lo que necesitas y encontramos juntos la mejor solución técnica para tu idea.</p>
+                </div>
+                <a href="./contacto.html" class="btn-primary">Hablemos →</a>
             </div>
         </div>
     </section>
 
-    <script src="../script/script.js"></script>
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-info">
+                <h3>Enrique Corpus Bejarano</h3>
+                <a href="mailto:corpus.dev@gmail.com">corpus.dev@gmail.com</a>
+                <p>Desarrollador de Software</p>
+            </div>
+            <span class="footer-copy">© 2026 CORPUS DEV</span>
+        </div>
+    </footer>
+
 </body>
 </html>

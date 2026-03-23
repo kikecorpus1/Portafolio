@@ -3,218 +3,409 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos - Corpus Dev</title>
+    <title>Proyectos — Corpus Dev</title>
     <link rel="icon" type="image/png" href="../img/opcion3.png">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/pages-proyectos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --naranja: #d7802f;
+            --naranja-vivo: #f09040;
+            --negro: #080808;
+            --gris-oscuro: #111111;
+            --gris-mid: #1a1a1a;
+            --gris-borde: rgba(255,255,255,0.08);
+            --blanco: #ffffff;
+            --font-display: 'Syne', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--negro); color: var(--blanco); font-family: var(--font-display); overflow-x: hidden; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+        /* HEADER */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 0 40px; height: 70px;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(8,8,8,0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gris-borde);
+        }
+        .logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 40px; width: auto; filter: drop-shadow(0 0 8px rgba(215,128,47,0.4)); transition: filter 0.3s; }
+        .logo-img:hover { filter: drop-shadow(0 0 14px rgba(215,128,47,0.8)); }
+        .logo-texto { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--naranja); letter-spacing: 2px; }
+        header nav { display: flex; align-items: center; gap: 4px; }
+        header nav a {
+            font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+            color: rgba(255,255,255,0.5); text-decoration: none;
+            padding: 8px 14px; border-radius: 6px; letter-spacing: 1px;
+            text-transform: uppercase; transition: color 0.2s, background 0.2s;
+        }
+        header nav a:hover { color: var(--naranja); background: rgba(215,128,47,0.08); }
+        header nav a.active { color: var(--naranja); }
+
+        /* HERO */
+        .page-hero {
+            min-height: 55vh; display: flex; align-items: flex-end;
+            padding: 0 0 60px; position: relative; overflow: hidden;
+            background-image:
+                linear-gradient(135deg, rgba(0,0,0,0.80), rgba(0,0,0,0.60)),
+                url(../img/expo3.jpeg);
+            background-size: cover; background-position: center center; background-attachment: fixed;
+        }
+        .page-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(215,128,47,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(215,128,47,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .hero-inner { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; }
+        .hero-badge {
+            font-family: var(--font-mono); font-size: 11px; color: var(--naranja);
+            letter-spacing: 3px; text-transform: uppercase;
+            border: 1px solid rgba(215,128,47,0.35); padding: 6px 14px;
+            border-radius: 2px; display: inline-block; margin-bottom: 20px;
+        }
+        .page-hero h1 { font-size: clamp(40px, 7vw, 80px); font-weight: 800; letter-spacing: -2px; line-height: 1; }
+        .page-hero h1 span { color: var(--naranja); }
+        .page-hero p { font-size: 16px; color: rgba(255,255,255,0.55); margin-top: 16px; max-width: 540px; line-height: 1.7; }
+
+        /* FILTROS */
+        .proyectos-body { padding: 60px 0 100px; }
+
+        .filtros {
+            display: flex; gap: 8px; flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .filtro-btn {
+            font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            background: var(--gris-mid);
+            border: 1px solid var(--gris-borde);
+            padding: 8px 18px; border-radius: 4px; cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filtro-btn:hover { color: var(--naranja); border-color: rgba(215,128,47,0.3); }
+        .filtro-btn.active { color: var(--naranja); border-color: var(--naranja); background: rgba(215,128,47,0.08); }
+
+        /* GRID PROYECTOS */
+        .proyectos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 20px;
+        }
+
+        .proyecto-card {
+            background: var(--gris-mid);
+            border: 1px solid var(--gris-borde);
+            border-radius: 14px; overflow: hidden;
+            display: flex; flex-direction: column;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .proyecto-card:hover {
+            border-color: rgba(215,128,47,0.35);
+            transform: translateY(-6px);
+        }
+
+        .proyecto-img-box {
+            width: 100%; height: 180px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 8px;
+            font-size: 52px; position: relative; overflow: hidden;
+        }
+
+        .proyecto-img-box img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+
+        .proyecto-stack-tag {
+            font-family: var(--font-mono); font-size: 11px;
+            color: var(--naranja); font-weight: 700; letter-spacing: 1px;
+        }
+
+        .proyecto-body {
+            padding: 22px 24px 24px;
+            display: flex; flex-direction: column; gap: 10px; flex: 1;
+        }
+
+        .proyecto-num {
+            font-family: var(--font-mono); font-size: 10px;
+            color: rgba(215,128,47,0.5); letter-spacing: 2px;
+        }
+
+        .proyecto-titulo { font-size: 17px; font-weight: 700; color: var(--blanco); }
+
+        .proyecto-desc {
+            font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; flex: 1;
+        }
+
+        .proyecto-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+        .badge {
+            font-family: var(--font-mono); font-size: 10px;
+            background: rgba(215,128,47,0.1); color: var(--naranja);
+            padding: 4px 10px; border-radius: 20px;
+            border: 1px solid rgba(215,128,47,0.2);
+        }
+
+        .proyecto-link {
+            display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
+            font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+            color: var(--naranja); border: 1px solid rgba(215,128,47,0.35);
+            padding: 9px 18px; border-radius: 6px; width: fit-content;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .proyecto-link:hover { background: var(--naranja); color: white; }
+
+        /* oculto por filtro */
+        .proyecto-card.hidden { display: none; }
+
+        /* FOOTER */
+        #footer {
+            background: var(--gris-oscuro); border-top: 1px solid var(--gris-borde);
+            padding: 48px 32px; display: flex; align-items: center; justify-content: center;
+        }
+        #footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-info { display: flex; flex-direction: column; gap: 4px; }
+        .footer-info h3 { font-size: 18px; font-weight: 700; }
+        .footer-info a { font-family: var(--font-mono); font-size: 12px; color: var(--naranja); text-decoration: none; }
+        .footer-info p { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.3); }
+        .footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+
+        @media (max-width: 700px) {
+            .proyectos-grid { grid-template-columns: 1fr; }
+            header { padding: 0 20px; }
+        }
+    </style>
 </head>
 <body>
+
     <header>
-        <div class="container">
-            <a href="../index.html" class="logo-link"><img src="../img/opcion3.png" alt="Corpus Dev Logo" class="logo-img"></a>
-            <nav>
-                <a href="../index.html">Inicio</a>
-                <a href="./sobre_nosotros.html">Sobre Nosotros</a>
-                <a href="./servicios.html">Servicios</a>
-                <a href="./proyectos.html">Proyectos</a>
-                <a href="./contacto.html">Contacto</a>
-            </nav>
-        </div>
+        <a href="../index.html" class="logo-link">
+            <img src="../img/opcion3.png" alt="Corpus Dev Logo" class="logo-img">
+            <span class="logo-texto">CORPUS DEV</span>
+        </a>
+        <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="./sobre_nosotros.html">Sobre Mí</a>
+            <a href="./servicios.html">Servicios</a>
+            <a href="./proyectos.html" class="active">Proyectos</a>
+            <a href="./contacto.html">Contacto</a>
+        </nav>
     </header>
 
-    <section id="proyectos-section">
-        <div class="proyectos-header">
-            <h1>Mis Proyectos</h1>
-            <p>Proyectos de backend, bases de datos y desarrollo web donde aplico Java, Spring Boot, MySQL, MongoDB y JavaScript.</p>
-        </div>
-
-        <div class="proyectos-container">
-
-            <!-- Proyecto 1: LogiTrack -->
-            <div class="proyecto-card">
-                <div class="proyecto-imagen" style="background-color: #1a1a2e; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
-                    <span style="font-size:48px;">🏭</span>
-                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">Spring Boot · JWT · MySQL</span>
-                </div>
-                <div class="proyecto-contenido">
-                    <h3 class="proyecto-titulo">LogiTrack — Gestión de Bodegas</h3>
-                    <p class="proyecto-descripcion">
-                        Sistema backend para administración de bodegas con control de inventario, movimientos (entradas, salidas, traslados) y auditoría automática de cambios por usuario. Incluye autenticación JWT y roles de acceso.
-                    </p>
-                    <div class="proyecto-tecnologias">
-                        <span class="tech-badge">Spring Boot 3</span>
-                        <span class="tech-badge">Java 17</span>
-                        <span class="tech-badge">Spring Security</span>
-                        <span class="tech-badge">JWT</span>
-                        <span class="tech-badge">MySQL</span>
-                        <span class="tech-badge">Swagger</span>
-                    </div>
-                    <div class="proyecto-botones">
-                        <a href="https://github.com/kikecorpus1/GestionBodegas_SpringBoot" class="btn-ver" target="_blank">Ver Repositorio</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proyecto 2: TecnoStore -->
-            <div class="proyecto-card">
-                <div class="proyecto-imagen" style="background-color: #0d1117; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
-                    <span style="font-size:48px;">📱</span>
-                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">Java · JDBC · MySQL</span>
-                </div>
-                <div class="proyecto-contenido">
-                    <h3 class="proyecto-titulo">TecnoStore — Gestión de Celulares</h3>
-                    <p class="proyecto-descripcion">
-                        Aplicación Java con conexión directa a MySQL que gestiona inventario, clientes, ventas y reportes. Implementa patrones de diseño Singleton, Prototype, Facade y DAO con Stream API y PreparedStatement.
-                    </p>
-                    <div class="proyecto-tecnologias">
-                        <span class="tech-badge">Java 25</span>
-                        <span class="tech-badge">JDBC</span>
-                        <span class="tech-badge">MySQL</span>
-                        <span class="tech-badge">Maven</span>
-                        <span class="tech-badge">DAO Pattern</span>
-                    </div>
-                    <div class="proyecto-botones">
-                        <a href="https://github.com/kikecorpus1/GestionVentaDeCelulares_Java" class="btn-ver" target="_blank">Ver Repositorio</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proyecto 3: Pizzería Don Piccolo -->
-            <div class="proyecto-card">
-                <div class="proyecto-imagen" style="background-color: #1a0a00; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
-                    <span style="font-size:48px;">🍕</span>
-                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">MySQL · Triggers · Procedures</span>
-                </div>
-                <div class="proyecto-contenido">
-                    <h3 class="proyecto-titulo">Pizzería Don Piccolo — BD Relacional</h3>
-                    <p class="proyecto-descripcion">
-                        Base de datos MySQL que automatiza operaciones de una pizzería: pedidos, precios, domicilios y control financiero. Toda la lógica de negocio está en triggers encadenados, funciones almacenadas y procedimientos.
-                    </p>
-                    <div class="proyecto-tecnologias">
-                        <span class="tech-badge">MySQL 8</span>
-                        <span class="tech-badge">Triggers</span>
-                        <span class="tech-badge">Stored Procedures</span>
-                        <span class="tech-badge">Functions</span>
-                        <span class="tech-badge">Views</span>
-                    </div>
-                    <div class="proyecto-botones">
-                        <a href="https://github.com/kikecorpus1/PizzeriaDonPiccolo_MYSQL" class="btn-ver" target="_blank">Ver Repositorio</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proyecto 4: Campus Music -->
-            <div class="proyecto-card">
-                <div class="proyecto-imagen" style="background-color: #0a1a0a; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
-                    <span style="font-size:48px;">🎵</span>
-                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">MongoDB · Aggregation · ACID</span>
-                </div>
-                <div class="proyecto-contenido">
-                    <h3 class="proyecto-titulo">Campus Music — BD NoSQL</h3>
-                    <p class="proyecto-descripcion">
-                        Sistema MongoDB para gestión de escuelas de música con validaciones JSON Schema, Aggregation Pipeline para reportes analíticos, transacciones ACID multi-documento y control de acceso por roles.
-                    </p>
-                    <div class="proyecto-tecnologias">
-                        <span class="tech-badge">MongoDB</span>
-                        <span class="tech-badge">Aggregation Pipeline</span>
-                        <span class="tech-badge">Transacciones ACID</span>
-                        <span class="tech-badge">JSON Schema</span>
-                        <span class="tech-badge">Roles</span>
-                    </div>
-                    <div class="proyecto-botones">
-                        <a href="https://github.com/kikecorpus1/CampusMusic_MongoDB" class="btn-ver" target="_blank">Ver Repositorio</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proyecto 5: Juego de Poker -->
-            <div class="proyecto-card">
-                <img src="../img/poker.gif" alt="Juego de Poker" class="proyecto-imagen">
-                <div class="proyecto-contenido">
-                    <h3 class="proyecto-titulo">Juego de Poker</h3>
-                    <p class="proyecto-descripcion">
-                        Juego de poker interactivo con lógica completa de evaluación de manos, gestión de apuestas y flujo de partida implementado en JavaScript vanilla.
-                    </p>
-                    <div class="proyecto-tecnologias">
-                        <span class="tech-badge">JavaScript</span>
-                        <span class="tech-badge">HTML</span>
-                        <span class="tech-badge">CSS</span>
-                    </div>
-                    <div class="proyecto-botones">
-                        <a href="https://kikecorpus1.github.io/JuegoDePoker_JavaScript" class="btn-ver" target="_blank">Ver Proyecto</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proyecto 6: Buscador de Pokémon -->
-            <div class="proyecto-card">
-                <img src="../img/pokemon.gif" alt="Buscador de Pokémon" class="proyecto-imagen">
-                <div class="proyecto-contenido">
-                    <h3 class="proyecto-titulo">Buscador de Pokémon</h3>
-                    <p class="proyecto-descripcion">
-                        Aplicación que consume la PokéAPI en tiempo real con filtros dinámicos, manejo de promesas y procesamiento de datos JSON asíncronos.
-                    </p>
-                    <div class="proyecto-tecnologias">
-                        <span class="tech-badge">JavaScript</span>
-                        <span class="tech-badge">API REST</span>
-                        <span class="tech-badge">CSS</span>
-                    </div>
-                    <div class="proyecto-botones">
-                        <a href="https://kikecorpus1.github.io/BuscadorDePokemones_JavaScript" class="btn-ver" target="_blank">Ver Proyecto</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proyecto 7: Plataforma LMS -->
-            <div class="proyecto-card">
-                <img src="../img/PlataformaLMS.gif" alt="Plataforma LMS" class="proyecto-imagen">
-                <div class="proyecto-contenido">
-                    <h3 class="proyecto-titulo">Plataforma LMS</h3>
-                    <p class="proyecto-descripcion">
-                        Academia SWBAR400 es un LMS funcional con gestión de cursos, docentes y estudiantes. Tres roles de usuario diferenciados, cada uno con su propio panel y funcionalidades específicas.
-                    </p>
-                    <div class="proyecto-tecnologias">
-                        <span class="tech-badge">JavaScript</span>
-                        <span class="tech-badge">MockAPI</span>
-                        <span class="tech-badge">CSS</span>
-                    </div>
-                    <div class="proyecto-botones">
-                        <a href="https://kikecorpus1.github.io/PlataformaLMS_JavaScript" class="btn-ver" target="_blank">Ver Proyecto</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proyecto 8: Simulador de Gastos -->
-            <div class="proyecto-card">
-                <div class="proyecto-imagen" style="background-color: #0a0a1a; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
-                    <span style="font-size:48px;">💰</span>
-                    <span style="color:#d7802f; font-weight:bold; font-size:14px;">Python · Consola</span>
-                </div>
-                <div class="proyecto-contenido">
-                    <h3 class="proyecto-titulo">Simulador de Gastos Diarios</h3>
-                    <p class="proyecto-descripcion">
-                        Aplicación de consola en Python para registro y análisis de gastos personales diarios con categorías, resúmenes y reportes de balance.
-                    </p>
-                    <div class="proyecto-tecnologias">
-                        <span class="tech-badge">Python</span>
-                    </div>
-                    <div class="proyecto-botones">
-                        <a href="https://github.com/kikecorpus1/SimuladorDeGastosDiario_Python" class="btn-ver" target="_blank">Ver Repositorio</a>
-                    </div>
-                </div>
-            </div>
-
+    <section class="page-hero">
+        <div class="hero-inner">
+            <span class="hero-badge">// Proyectos</span>
+            <h1>Lo que he<br><span>construido.</span></h1>
+            <p>Backend, bases de datos y desarrollo web — proyectos que aplican Java, Spring Boot, MySQL, MongoDB y JavaScript.</p>
         </div>
     </section>
 
-    <section id="contacto">
+    <section class="proyectos-body">
         <div class="container">
-            <div>
-                <p>© 2026 Corpus Dev - Todos los derechos reservados</p>
+
+            <!-- Filtros -->
+            <div class="filtros">
+                <button class="filtro-btn active" onclick="filtrar('todos', this)">Todos</button>
+                <button class="filtro-btn" onclick="filtrar('backend', this)">Backend</button>
+                <button class="filtro-btn" onclick="filtrar('database', this)">Bases de datos</button>
+                <button class="filtro-btn" onclick="filtrar('frontend', this)">Frontend / JS</button>
+                <button class="filtro-btn" onclick="filtrar('python', this)">Python</button>
+            </div>
+
+            <div class="proyectos-grid" id="grid">
+
+                <div class="proyecto-card" data-cat="backend">
+                    <div class="proyecto-img-box" style="background:#1a1a2e;">
+                       <img src="../img/logitrack.gif" alt="">
+                        <span class="proyecto-stack-tag">Spring Boot · JWT · MySQL</span>
+                    </div>
+                    <div class="proyecto-body">
+                        <span class="proyecto-num">P-01</span>
+                        <h3 class="proyecto-titulo">LogiTrack — Gestión de Bodegas</h3>
+                        <p class="proyecto-desc">Sistema backend para administración de bodegas con control de inventario, movimientos (entradas, salidas, traslados) y auditoría automática por usuario. Autenticación JWT y roles de acceso.</p>
+                        <div class="proyecto-badges">
+                            <span class="badge">Spring Boot 3</span>
+                            <span class="badge">Java 17</span>
+                            <span class="badge">Spring Security</span>
+                            <span class="badge">JWT</span>
+                            <span class="badge">MySQL</span>
+                            <span class="badge">Swagger</span>
+                        </div>
+                        <a href="https://github.com/kikecorpus1/GestionBodegas_SpringBoot" class="proyecto-link" target="_blank">Ver repositorio →</a>
+                    </div>
+                </div>
+
+                <div class="proyecto-card" data-cat="backend">
+                    <div class="proyecto-img-box" style="background:#0d1117;">
+                        <img src="../img/ventasCelular.gif" alt="">
+                        <span class="proyecto-stack-tag">Java · JDBC · MySQL</span>
+                    </div>
+                    <div class="proyecto-body">
+                        <span class="proyecto-num">P-02</span>
+                        <h3 class="proyecto-titulo">TecnoStore — Gestión de Celulares</h3>
+                        <p class="proyecto-desc">Aplicación Java con conexión directa a MySQL. Gestiona inventario, clientes, ventas y reportes. Implementa Singleton, Prototype, Facade y DAO con Stream API y PreparedStatement.</p>
+                        <div class="proyecto-badges">
+                            <span class="badge">Java</span>
+                            <span class="badge">JDBC</span>
+                            <span class="badge">MySQL</span>
+                            <span class="badge">Maven</span>
+                            <span class="badge">DAO Pattern</span>
+                        </div>
+                        <a href="https://github.com/kikecorpus1/GestionVentaDeCelulares_Java" class="proyecto-link" target="_blank">Ver repositorio →</a>
+                    </div>
+                </div>
+
+                <div class="proyecto-card" data-cat="database">
+                    <div class="proyecto-img-box" style="background:#1a0a00;">
+                        <span>🍕</span>
+                        <span class="proyecto-stack-tag">MySQL · Triggers · Procedures</span>
+                    </div>
+                    <div class="proyecto-body">
+                        <span class="proyecto-num">P-03</span>
+                        <h3 class="proyecto-titulo">Pizzería Don Piccolo — BD Relacional</h3>
+                        <p class="proyecto-desc">Base de datos MySQL que automatiza operaciones de una pizzería: pedidos, precios, domicilios y control financiero. Toda la lógica de negocio en triggers encadenados, funciones y procedimientos almacenados.</p>
+                        <div class="proyecto-badges">
+                            <span class="badge">MySQL 8</span>
+                            <span class="badge">Triggers</span>
+                            <span class="badge">Stored Procedures</span>
+                            <span class="badge">Functions</span>
+                            <span class="badge">Views</span>
+                        </div>
+                        <a href="https://github.com/kikecorpus1/PizzeriaDonPiccolo_MYSQL" class="proyecto-link" target="_blank">Ver repositorio →</a>
+                    </div>
+                </div>
+
+                <div class="proyecto-card" data-cat="database">
+                    <div class="proyecto-img-box" style="background:#0a1a0a;">
+                        <span>🎵</span>
+                        <span class="proyecto-stack-tag">MongoDB · Aggregation · ACID</span>
+                    </div>
+                    <div class="proyecto-body">
+                        <span class="proyecto-num">P-04</span>
+                        <h3 class="proyecto-titulo">Campus Music — BD NoSQL</h3>
+                        <p class="proyecto-desc">Sistema MongoDB para gestión de escuelas de música con validaciones JSON Schema, Aggregation Pipeline para reportes analíticos, transacciones ACID multi-documento y control de acceso por roles.</p>
+                        <div class="proyecto-badges">
+                            <span class="badge">MongoDB</span>
+                            <span class="badge">Aggregation</span>
+                            <span class="badge">ACID</span>
+                            <span class="badge">JSON Schema</span>
+                            <span class="badge">Roles</span>
+                        </div>
+                        <a href="https://github.com/kikecorpus1/CampusMusic_MongoDB" class="proyecto-link" target="_blank">Ver repositorio →</a>
+                    </div>
+                </div>
+
+                <div class="proyecto-card" data-cat="frontend">
+                    <div class="proyecto-img-box" style="background:#1a0520;">
+                        <img src="../img/poker.gif" alt="">
+                        <span class="proyecto-stack-tag">JavaScript · HTML · CSS</span>
+                    </div>
+                    <div class="proyecto-body">
+                        <span class="proyecto-num">P-05</span>
+                        <h3 class="proyecto-titulo">Juego de Poker</h3>
+                        <p class="proyecto-desc">Juego de poker interactivo con lógica completa de evaluación de manos, gestión de apuestas y flujo de partida implementado en JavaScript vanilla.</p>
+                        <div class="proyecto-badges">
+                            <span class="badge">JavaScript</span>
+                            <span class="badge">HTML</span>
+                            <span class="badge">CSS</span>
+                        </div>
+                        <a href="https://kikecorpus1.github.io/JuegoDePoker_JavaScript" class="proyecto-link" target="_blank">Ver proyecto →</a>
+                    </div>
+                </div>
+
+                <div class="proyecto-card" data-cat="frontend">
+                    <div class="proyecto-img-box" style="background:#1a1400;">
+                        <img src="../img/pokemon.gif" alt="">
+                        <span class="proyecto-stack-tag">JavaScript · REST API</span>
+                    </div>
+                    <div class="proyecto-body">
+                        <span class="proyecto-num">P-06</span>
+                        <h3 class="proyecto-titulo">Buscador de Pokémon</h3>
+                        <p class="proyecto-desc">Aplicación que consume la PokéAPI en tiempo real con filtros dinámicos, manejo de promesas y procesamiento asíncrono de datos JSON.</p>
+                        <div class="proyecto-badges">
+                            <span class="badge">JavaScript</span>
+                            <span class="badge">API REST</span>
+                            <span class="badge">Async/Await</span>
+                        </div>
+                        <a href="https://kikecorpus1.github.io/BuscadorDePokemones_JavaScript" class="proyecto-link" target="_blank">Ver proyecto →</a>
+                    </div>
+                </div>
+
+                <div class="proyecto-card" data-cat="frontend">
+                    <div class="proyecto-img-box" style="background:#001a12;">
+                       <img src="../img/PlataformaLMS.gif" alt="">
+                        <span class="proyecto-stack-tag">JavaScript · MockAPI</span>
+                    </div>
+                    <div class="proyecto-body">
+                        <span class="proyecto-num">P-07</span>
+                        <h3 class="proyecto-titulo">Plataforma LMS</h3>
+                        <p class="proyecto-desc">Academia SWBAR400 — LMS funcional con gestión de cursos, docentes y estudiantes. Tres roles de usuario diferenciados, cada uno con su propio panel y funcionalidades.</p>
+                        <div class="proyecto-badges">
+                            <span class="badge">JavaScript</span>
+                            <span class="badge">MockAPI</span>
+                            <span class="badge">CSS</span>
+                        </div>
+                        <a href="https://kikecorpus1.github.io/PlataformaLMS_JavaScript" class="proyecto-link" target="_blank">Ver proyecto →</a>
+                    </div>
+                </div>
+
+                <div class="proyecto-card" data-cat="python">
+                    <div class="proyecto-img-box" style="background:#0a0a1a;">
+                        <span>💰</span>
+                        <span class="proyecto-stack-tag">Python · Consola</span>
+                    </div>
+                    <div class="proyecto-body">
+                        <span class="proyecto-num">P-08</span>
+                        <h3 class="proyecto-titulo">Simulador de Gastos Diarios</h3>
+                        <p class="proyecto-desc">Aplicación de consola en Python para registro y análisis de gastos personales diarios con categorías, resúmenes y reportes de balance.</p>
+                        <div class="proyecto-badges">
+                            <span class="badge">Python</span>
+                        </div>
+                        <a href="https://github.com/kikecorpus1/SimuladorDeGastosDiario_Python" class="proyecto-link" target="_blank">Ver repositorio →</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <script src="../script/script.js"></script>
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-info">
+                <h3>Enrique Corpus Bejarano</h3>
+                <a href="mailto:corpus.dev@gmail.com">corpus.dev@gmail.com</a>
+                <p>Desarrollador de Software</p>
+            </div>
+            <span class="footer-copy">© 2026 CORPUS DEV</span>
+        </div>
+    </footer>
+
+    <script>
+        function filtrar(cat, btn) {
+            document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.proyecto-card').forEach(card => {
+                if (cat === 'todos' || card.dataset.cat === cat) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>

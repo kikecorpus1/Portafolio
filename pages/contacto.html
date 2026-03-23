@@ -3,92 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - Corpus Dev</title>
+    <title>Contacto — Corpus Dev</title>
     <link rel="icon" type="image/png" href="../img/opcion3.png">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/contacto.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --naranja: #d7802f;
+            --naranja-vivo: #f09040;
+            --negro: #080808;
+            --gris-oscuro: #111111;
+            --gris-mid: #1a1a1a;
+            --gris-borde: rgba(255,255,255,0.08);
+            --blanco: #ffffff;
+            --font-display: 'Syne', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--negro); color: var(--blanco); font-family: var(--font-display); overflow-x: hidden; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+        /* HEADER */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 0 40px; height: 70px;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(8,8,8,0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gris-borde);
+        }
+        .logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 40px; width: auto; filter: drop-shadow(0 0 8px rgba(215,128,47,0.4)); transition: filter 0.3s; }
+        .logo-img:hover { filter: drop-shadow(0 0 14px rgba(215,128,47,0.8)); }
+        .logo-texto { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--naranja); letter-spacing: 2px; }
+        header nav { display: flex; align-items: center; gap: 4px; }
+        header nav a {
+            font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+            color: rgba(255,255,255,0.5); text-decoration: none;
+            padding: 8px 14px; border-radius: 6px; letter-spacing: 1px;
+            text-transform: uppercase; transition: color 0.2s, background 0.2s;
+        }
+        header nav a:hover { color: var(--naranja); background: rgba(215,128,47,0.08); }
+        header nav a.active { color: var(--naranja); }
+
+        /* HERO */
+        .page-hero {
+            min-height: 55vh; display: flex; align-items: flex-end;
+            padding: 0 0 60px; position: relative; overflow: hidden;
+            background-image:
+                linear-gradient(135deg, rgba(0,0,0,0.80), rgba(0,0,0,0.60)),
+                url(../img/pausaActiva1.jpeg);
+            background-size: cover; background-position: center center; background-attachment: fixed;
+        }
+        .page-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(215,128,47,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(215,128,47,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .hero-inner { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; }
+        .hero-badge {
+            font-family: var(--font-mono); font-size: 11px; color: var(--naranja);
+            letter-spacing: 3px; text-transform: uppercase;
+            border: 1px solid rgba(215,128,47,0.35); padding: 6px 14px;
+            border-radius: 2px; display: inline-block; margin-bottom: 20px;
+        }
+        .page-hero h1 { font-size: clamp(40px, 7vw, 80px); font-weight: 800; letter-spacing: -2px; line-height: 1; }
+        .page-hero h1 span { color: var(--naranja); }
+
+        /* CONTACTO BODY */
+        .contacto-body { padding: 80px 0 100px; }
+
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* Columna izquierda */
+        .contacto-aside { display: flex; flex-direction: column; gap: 32px; }
+
+        .aside-intro { display: flex; flex-direction: column; gap: 14px; }
+
+        .aside-label {
+            font-family: var(--font-mono); font-size: 11px;
+            color: var(--naranja); letter-spacing: 3px; text-transform: uppercase; opacity: 0.75;
+        }
+
+        .aside-intro h2 {
+            font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.5px; line-height: 1.2;
+        }
+
+        .aside-intro p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+
+        .contacto-items { display: flex; flex-direction: column; gap: 12px; }
+
+        .contacto-item {
+            display: flex; align-items: center; gap: 16px;
+            padding: 16px 20px;
+            background: var(--gris-mid);
+            border: 1px solid var(--gris-borde);
+            border-radius: 10px;
+            text-decoration: none;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .contacto-item:hover { border-color: rgba(215,128,47,0.35); transform: translateX(4px); }
+
+        .item-icon {
+            width: 40px; height: 40px;
+            background: rgba(215,128,47,0.1);
+            border: 1px solid rgba(215,128,47,0.2);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; flex-shrink: 0;
+        }
+
+        .item-text { display: flex; flex-direction: column; gap: 2px; }
+
+        .item-label {
+            font-family: var(--font-mono); font-size: 10px;
+            color: var(--naranja); letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7;
+        }
+
+        .item-valor { font-size: 14px; font-weight: 600; color: var(--blanco); }
+
+        /* Disponibilidad */
+        .disponible {
+            display: flex; align-items: center; gap: 10px;
+            padding: 14px 18px;
+            background: rgba(39,201,63,0.06);
+            border: 1px solid rgba(39,201,63,0.15);
+            border-radius: 8px;
+        }
+
+        .pulse-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #27c93f; flex-shrink: 0;
+            box-shadow: 0 0 0 0 rgba(39,201,63,0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(39,201,63,0.4); }
+            70%  { box-shadow: 0 0 0 8px rgba(39,201,63,0); }
+            100% { box-shadow: 0 0 0 0 rgba(39,201,63,0); }
+        }
+
+        .disponible span { font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; }
+        .disponible strong { color: #27c93f; }
+
+        /* FORMULARIO */
+        .form-card {
+            background: var(--gris-mid);
+            border: 1px solid var(--gris-borde);
+            border-radius: 14px;
+            padding: 40px;
+        }
+
+        .form-card h3 {
+            font-size: 20px; font-weight: 800; margin-bottom: 28px; letter-spacing: -0.3px;
+        }
+
+        form { display: flex; flex-direction: column; gap: 20px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+        .form-group label {
+            font-family: var(--font-mono); font-size: 10px;
+            color: var(--naranja); letter-spacing: 2px; text-transform: uppercase; opacity: 0.75;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--gris-borde);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: var(--blanco);
+            transition: border-color 0.2s, background 0.2s;
+            outline: none;
+            width: 100%;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: rgba(215,128,47,0.5);
+            background: rgba(215,128,47,0.04);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+
+        .form-group select { cursor: pointer; appearance: none; }
+        .form-group select option { background: #1a1a1a; color: white; }
+
+        .btn-submit {
+            background: var(--naranja); color: #fff;
+            font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+            padding: 15px 32px; border-radius: 8px; border: none; cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 6px 24px rgba(215,128,47,0.25);
+            width: 100%;
+        }
+
+        .btn-submit:hover { background: var(--naranja-vivo); transform: translateY(-2px); }
+
+        .form-nota {
+            font-family: var(--font-mono); font-size: 11px;
+            color: rgba(255,255,255,0.25); text-align: center; margin-top: -4px;
+        }
+
+        /* FOOTER */
+        #footer {
+            background: var(--gris-oscuro); border-top: 1px solid var(--gris-borde);
+            padding: 48px 32px; display: flex; align-items: center; justify-content: center;
+        }
+        #footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-info { display: flex; flex-direction: column; gap: 4px; }
+        .footer-info h3 { font-size: 18px; font-weight: 700; }
+        .footer-info a { font-family: var(--font-mono); font-size: 12px; color: var(--naranja); text-decoration: none; }
+        .footer-info p { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.3); }
+        .footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+
+        @media (max-width: 900px) {
+            .contacto-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            header { padding: 0 20px; }
+        }
+
+        @media (max-width: 500px) {
+            .form-card { padding: 24px; }
+        }
+    </style>
 </head>
 <body>
+
     <header>
-        <div class="container">
-            <a href="../index.html" class="logo-link"><img src="../img/opcion3.png" alt="Corpus Dev Logo" class="logo-img"></a>
-            <nav>
-                <a href="../index.html">Inicio</a>
-                <a href="./sobre_nosotros.html">Sobre Nosotros</a>
-                <a href="./servicios.html">Servicios</a>
-                <a href="./proyectos.html">Proyectos</a>
-                <a href="./contacto.html">Contacto</a>
-            </nav>
-        </div>
+        <a href="../index.html" class="logo-link">
+            <img src="../img/opcion3.png" alt="Corpus Dev Logo" class="logo-img">
+            <span class="logo-texto">CORPUS DEV</span>
+        </a>
+        <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="./sobre_nosotros.html">Sobre Mí</a>
+            <a href="./servicios.html">Servicios</a>
+            <a href="./proyectos.html">Proyectos</a>
+            <a href="./contacto.html" class="active">Contacto</a>
+        </nav>
     </header>
 
-    <section id="contacto-section">
-        <div class="contacto-container">
-            <!-- Información de Contacto -->
-            <div class="contacto-info">
-                <div>
-                    <h2>¡Ponte en Contacto!</h2>
-                    <p>Me encanta colaborar y escuchar sobre nuevos proyectos. Siéntete libre de enviarme un mensaje a través del formulario o contáctame directamente.</p>
-                </div>
-
-                <div class="info-item">
-                    <strong>📧 Correo Electrónico</strong>
-                    <a href="mailto:enrique.corpus.5004@hotmail.com">enrique.corpus.5004@hotmail.com</a>
-                </div>
-
-                <div class="info-item">
-                    <strong>👤 Nombre</strong>
-                    <p>Enrique Corpus Bejarano</p>
-                </div>
-
-                <div class="info-item">
-                    <strong>💼 Profesión</strong>
-                    <p>Desarrollador de Software</p>
-                </div>
-
-                <div class="info-item">
-                    <strong>🌐 En línea</strong>
-                    <p>Disponible para consultas y proyectos</p>
-                </div>
-            </div>
-
-            <!-- Formulario de Contacto -->
-            <form class="formulario-contacto" action="https://formspree.io/f/mvzwyynv" method="POST">
-                <h2>Envía tu Mensaje</h2>
-
-                <div class="form-group">
-                    <label for="nombre">Nombre Completo *</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Correo Electrónico *</label>
-                    <input type="email" id="email" name="email" placeholder="tu@email.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="asunto">Asunto *</label>
-                    <input type="text" id="asunto" name="asunto" placeholder="¿Sobre qué es tu mensaje?" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="mensaje">Mensaje *</label>
-                    <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
-                </div>
-
-                <button type="submit" class="form-button">Enviar Mensaje</button>
-            </form>
+    <section class="page-hero">
+        <div class="hero-inner">
+            <span class="hero-badge">// Contacto</span>
+            <h1>Hablemos<br><span>de tu idea.</span></h1>
         </div>
     </section>
 
-    <section id="contacto">
+    <section class="contacto-body">
         <div class="container">
-            <div>
-                <p>© 2026 Corpus Dev - Todos los derechos reservados</p>
+            <div class="contacto-grid">
+
+                <!-- ASIDE -->
+                <aside class="contacto-aside">
+                    <div class="aside-intro">
+                        <span class="aside-label">// Ponte en contacto</span>
+                        <h2>¿Tienes un proyecto en mente?</h2>
+                        <p>Me encanta escuchar sobre nuevas ideas. Siéntete libre de escribirme — te respondo lo antes posible.</p>
+                    </div>
+
+                    <div class="contacto-items">
+                        <a href="mailto:corpus.dev@gmail.com" class="contacto-item">
+                            <div class="item-icon">📧</div>
+                            <div class="item-text">
+                                <span class="item-label">Correo</span>
+                                <span class="item-valor">corpus.dev@gmail.com</span>
+                            </div>
+                        </a>
+                        <a href="mailto:enrique.corpus.5004@hotmail.com" class="contacto-item">
+                            <div class="item-icon">📬</div>
+                            <div class="item-text">
+                                <span class="item-label">Hotmail</span>
+                                <span class="item-valor">enrique.corpus.5004@hotmail.com</span>
+                            </div>
+                        </a>
+                        <a href="https://github.com/kikecorpus1" class="contacto-item" target="_blank">
+                            <div class="item-icon">⚙️</div>
+                            <div class="item-text">
+                                <span class="item-label">GitHub</span>
+                                <span class="item-valor">github.com/kikecorpus1</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="disponible">
+                        <div class="pulse-dot"></div>
+                        <span><strong>Disponible</strong> para proyectos y consultas</span>
+                    </div>
+                </aside>
+
+                <!-- FORMULARIO -->
+                <div class="form-card">
+                    <h3>Envía tu mensaje</h3>
+                    <form action="https://formspree.io/f/mvzwyynv" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre *</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo *</label>
+                                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="servicio">Servicio de interés</label>
+                            <select id="servicio" name="servicio">
+                                <option value="">Selecciona una opción...</option>
+                                <option value="web-app">Aplicativo Web</option>
+                                <option value="pagina-web">Página Web</option>
+                                <option value="escritorio">Programa de Escritorio</option>
+                                <option value="soporte">Soporte en Desarrollo</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="asunto">Asunto *</label>
+                            <input type="text" id="asunto" name="asunto" placeholder="¿Sobre qué quieres hablar?" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" placeholder="Cuéntame tu idea o proyecto..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Enviar mensaje →</button>
+                        <p class="form-nota">Respondo en menos de 24 horas</p>
+                    </form>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <script src="../script/script.js"></script>
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-info">
+                <h3>Enrique Corpus Bejarano</h3>
+                <a href="mailto:corpus.dev@gmail.com">corpus.dev@gmail.com</a>
+                <p>Desarrollador de Software</p>
+            </div>
+            <span class="footer-copy">© 2026 CORPUS DEV</span>
+        </div>
+    </footer>
+
 </body>
 </html>
