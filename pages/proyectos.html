@@ -229,7 +229,7 @@
 
                 <div class="proyecto-card" data-cat="backend">
                     <div class="proyecto-img-box" style="background:#1a1a2e;">
-                       <img src="../img/logitrack.gif" alt="">
+                       <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="../img/logitrack.mp4" type="video/mp4"></video>
                         <span class="proyecto-stack-tag">Spring Boot · JWT · MySQL</span>
                     </div>
                     <div class="proyecto-body">
@@ -250,7 +250,7 @@
 
                 <div class="proyecto-card" data-cat="backend">
                     <div class="proyecto-img-box" style="background:#0d1117;">
-                        <img src="../img/ventasCelular.gif" alt="">
+                        <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="../img/ventasCelular.mp4" type="video/mp4"></video>
                         <span class="proyecto-stack-tag">Java · JDBC · MySQL</span>
                     </div>
                     <div class="proyecto-body">
@@ -310,7 +310,7 @@
 
                 <div class="proyecto-card" data-cat="frontend">
                     <div class="proyecto-img-box" style="background:#1a0520;">
-                        <img src="../img/poker.gif" alt="">
+                        <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="../img/poker.mp4" type="video/mp4"></video>
                         <span class="proyecto-stack-tag">JavaScript · HTML · CSS</span>
                     </div>
                     <div class="proyecto-body">
@@ -328,7 +328,7 @@
 
                 <div class="proyecto-card" data-cat="frontend">
                     <div class="proyecto-img-box" style="background:#1a1400;">
-                        <img src="../img/pokemon.gif" alt="">
+                        <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="../img/pokemon.mp4" type="video/mp4"></video>
                         <span class="proyecto-stack-tag">JavaScript · REST API</span>
                     </div>
                     <div class="proyecto-body">
@@ -346,7 +346,7 @@
 
                 <div class="proyecto-card" data-cat="frontend">
                     <div class="proyecto-img-box" style="background:#001a12;">
-                       <img src="../img/PlataformaLMS.gif" alt="">
+                       <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="../img/PlataformaLMS.mp4" type="video/mp4"></video>
                         <span class="proyecto-stack-tag">JavaScript · MockAPI</span>
                     </div>
                     <div class="proyecto-body">
@@ -386,26 +386,16 @@
         <div class="container">
             <div class="footer-info">
                 <h3>Enrique Corpus Bejarano</h3>
-                <a href="mailto:corpus.dev@gmail.com">corpus.dev@gmail.com</a>
+                <a href="/cdn-cgi/l/email-protection#fa9995888a8f89d49e9f8cba9d979b9396d4999597"><span class="__cf_email__" data-cfemail="bdded2cfcdc8ce93d9d8cbfddad0dcd4d193ded2d0">[email&#160;protected]</span></a>
                 <p>Desarrollador de Software</p>
             </div>
             <span class="footer-copy">© 2026 CORPUS DEV</span>
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         function filtrar(cat, btn) {
             document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             document.querySelectorAll('.proyecto-card').forEach(card => {
-                if (cat === 'todos' || card.dataset.cat === cat) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-        }
-    </script>
-
-</body>
-</html>
+                if (cat =
