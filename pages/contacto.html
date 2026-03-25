@@ -48,6 +48,41 @@
         header nav a:hover { color: var(--naranja); background: rgba(215,128,47,0.08); }
         header nav a.active { color: var(--naranja); }
 
+        /* HAMBURGER */
+        .hamburger {
+            display: none; flex-direction: column; justify-content: center;
+            gap: 5px; width: 40px; height: 40px;
+            background: none; border: 1px solid var(--gris-borde);
+            border-radius: 8px; cursor: pointer; padding: 8px;
+            transition: border-color 0.2s; z-index: 101;
+        }
+        .hamburger:hover { border-color: rgba(215,128,47,0.5); }
+        .hamburger span { display: block; height: 2px; background: var(--blanco); border-radius: 2px; transition: transform 0.3s, opacity 0.3s, background 0.2s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--naranja); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--naranja); }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            display: none; position: fixed;
+            top: 70px; left: 0; right: 0;
+            background: rgba(8,8,8,0.97); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gris-borde);
+            padding: 20px 24px 28px; flex-direction: column; gap: 4px;
+            z-index: 99; transform: translateY(-10px); opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .mobile-menu.open { display: flex; transform: translateY(0); opacity: 1; }
+        .mobile-menu a {
+            font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            padding: 14px 16px; border-radius: 8px; letter-spacing: 1px;
+            text-transform: uppercase; border: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--naranja); border-color: rgba(215,128,47,0.25); background: rgba(215,128,47,0.06); }
+        .mobile-menu a.active { color: var(--naranja); }
+
         /* HERO */
         .page-hero {
             min-height: 55vh; display: flex; align-items: flex-end;
@@ -77,136 +112,55 @@
         /* CONTACTO BODY */
         .contacto-body { padding: 80px 0 100px; }
 
-        .contacto-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.4fr;
-            gap: 60px;
-            align-items: start;
-        }
+        .contacto-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: start; }
 
-        /* Columna izquierda */
         .contacto-aside { display: flex; flex-direction: column; gap: 32px; }
-
         .aside-intro { display: flex; flex-direction: column; gap: 14px; }
-
-        .aside-label {
-            font-family: var(--font-mono); font-size: 11px;
-            color: var(--naranja); letter-spacing: 3px; text-transform: uppercase; opacity: 0.75;
-        }
-
-        .aside-intro h2 {
-            font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.5px; line-height: 1.2;
-        }
-
+        .aside-label { font-family: var(--font-mono); font-size: 11px; color: var(--naranja); letter-spacing: 3px; text-transform: uppercase; opacity: 0.75; }
+        .aside-intro h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
         .aside-intro p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.8; }
 
         .contacto-items { display: flex; flex-direction: column; gap: 12px; }
-
         .contacto-item {
             display: flex; align-items: center; gap: 16px;
-            padding: 16px 20px;
-            background: var(--gris-mid);
-            border: 1px solid var(--gris-borde);
-            border-radius: 10px;
-            text-decoration: none;
-            transition: border-color 0.2s, transform 0.2s;
+            padding: 16px 20px; background: var(--gris-mid);
+            border: 1px solid var(--gris-borde); border-radius: 10px;
+            text-decoration: none; transition: border-color 0.2s, transform 0.2s;
         }
-
         .contacto-item:hover { border-color: rgba(215,128,47,0.35); transform: translateX(4px); }
+        .item-icon { width: 40px; height: 40px; background: rgba(215,128,47,0.1); border: 1px solid rgba(215,128,47,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .item-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .item-label { font-family: var(--font-mono); font-size: 10px; color: var(--naranja); letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7; }
+        .item-valor { font-size: 14px; font-weight: 600; color: var(--blanco); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .item-icon {
-            width: 40px; height: 40px;
-            background: rgba(215,128,47,0.1);
-            border: 1px solid rgba(215,128,47,0.2);
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px; flex-shrink: 0;
-        }
-
-        .item-text { display: flex; flex-direction: column; gap: 2px; }
-
-        .item-label {
-            font-family: var(--font-mono); font-size: 10px;
-            color: var(--naranja); letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7;
-        }
-
-        .item-valor { font-size: 14px; font-weight: 600; color: var(--blanco); }
-
-        /* Disponibilidad */
-        .disponible {
-            display: flex; align-items: center; gap: 10px;
-            padding: 14px 18px;
-            background: rgba(39,201,63,0.06);
-            border: 1px solid rgba(39,201,63,0.15);
-            border-radius: 8px;
-        }
-
-        .pulse-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: #27c93f; flex-shrink: 0;
-            box-shadow: 0 0 0 0 rgba(39,201,63,0.4);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%   { box-shadow: 0 0 0 0 rgba(39,201,63,0.4); }
-            70%  { box-shadow: 0 0 0 8px rgba(39,201,63,0); }
-            100% { box-shadow: 0 0 0 0 rgba(39,201,63,0); }
-        }
-
+        .disponible { display: flex; align-items: center; gap: 10px; padding: 14px 18px; background: rgba(39,201,63,0.06); border: 1px solid rgba(39,201,63,0.15); border-radius: 8px; }
+        .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #27c93f; flex-shrink: 0; box-shadow: 0 0 0 0 rgba(39,201,63,0.4); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(39,201,63,0.4); } 70% { box-shadow: 0 0 0 8px rgba(39,201,63,0); } 100% { box-shadow: 0 0 0 0 rgba(39,201,63,0); } }
         .disponible span { font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; }
         .disponible strong { color: #27c93f; }
 
         /* FORMULARIO */
-        .form-card {
-            background: var(--gris-mid);
-            border: 1px solid var(--gris-borde);
-            border-radius: 14px;
-            padding: 40px;
-        }
-
-        .form-card h3 {
-            font-size: 20px; font-weight: 800; margin-bottom: 28px; letter-spacing: -0.3px;
-        }
+        .form-card { background: var(--gris-mid); border: 1px solid var(--gris-borde); border-radius: 14px; padding: 40px; }
+        .form-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 28px; letter-spacing: -0.3px; }
 
         form { display: flex; flex-direction: column; gap: 20px; }
-
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
         .form-group { display: flex; flex-direction: column; gap: 8px; }
-
-        .form-group label {
-            font-family: var(--font-mono); font-size: 10px;
-            color: var(--naranja); letter-spacing: 2px; text-transform: uppercase; opacity: 0.75;
-        }
-
+        .form-group label { font-family: var(--font-mono); font-size: 10px; color: var(--naranja); letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; }
         .form-group input,
         .form-group textarea,
         .form-group select {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--gris-borde);
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-family: var(--font-display);
-            font-size: 14px;
-            color: var(--blanco);
-            transition: border-color 0.2s, background 0.2s;
-            outline: none;
-            width: 100%;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--gris-borde);
+            border-radius: 8px; padding: 12px 16px;
+            font-family: var(--font-display); font-size: 14px; color: var(--blanco);
+            transition: border-color 0.2s, background 0.2s; outline: none; width: 100%;
         }
-
         .form-group input::placeholder,
         .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
-
         .form-group input:focus,
         .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: rgba(215,128,47,0.5);
-            background: rgba(215,128,47,0.04);
-        }
-
+        .form-group select:focus { border-color: rgba(215,128,47,0.5); background: rgba(215,128,47,0.04); }
         .form-group textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
-
         .form-group select { cursor: pointer; appearance: none; }
         .form-group select option { background: #1a1a1a; color: white; }
 
@@ -216,22 +170,14 @@
             letter-spacing: 1px; text-transform: uppercase;
             padding: 15px 32px; border-radius: 8px; border: none; cursor: pointer;
             transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 6px 24px rgba(215,128,47,0.25);
-            width: 100%;
+            box-shadow: 0 6px 24px rgba(215,128,47,0.25); width: 100%;
         }
-
         .btn-submit:hover { background: var(--naranja-vivo); transform: translateY(-2px); }
 
-        .form-nota {
-            font-family: var(--font-mono); font-size: 11px;
-            color: rgba(255,255,255,0.25); text-align: center; margin-top: -4px;
-        }
+        .form-nota { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; margin-top: -4px; }
 
         /* FOOTER */
-        #footer {
-            background: var(--gris-oscuro); border-top: 1px solid var(--gris-borde);
-            padding: 48px 32px; display: flex; align-items: center; justify-content: center;
-        }
+        #footer { background: var(--gris-oscuro); border-top: 1px solid var(--gris-borde); padding: 48px 32px; display: flex; align-items: center; justify-content: center; }
         #footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .footer-info { display: flex; flex-direction: column; gap: 4px; }
         .footer-info h3 { font-size: 18px; font-weight: 700; }
@@ -239,14 +185,25 @@
         .footer-info p { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.3); }
         .footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
 
+        /* RESPONSIVE */
         @media (max-width: 900px) {
+            header { padding: 0 20px; }
+            header nav { display: none; }
+            .hamburger { display: flex; }
             .contacto-grid { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; }
-            header { padding: 0 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero { background-attachment: scroll; }
+            .logo-texto { display: none; }
         }
 
         @media (max-width: 500px) {
             .form-card { padding: 24px; }
+            .container { padding: 0 20px; }
+            /* Emails largos en móvil */
+            .item-valor { font-size: 12px; }
         }
     </style>
 </head>
@@ -264,7 +221,18 @@
             <a href="./proyectos.html">Proyectos</a>
             <a href="./contacto.html" class="active">Contacto</a>
         </nav>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+            <span></span><span></span><span></span>
+        </button>
     </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="../index.html" onclick="closeMobileMenu()">Inicio</a>
+        <a href="./sobre_nosotros.html" onclick="closeMobileMenu()">Sobre Mí</a>
+        <a href="./servicios.html" onclick="closeMobileMenu()">Servicios</a>
+        <a href="./proyectos.html" onclick="closeMobileMenu()">Proyectos</a>
+        <a href="./contacto.html" class="active" onclick="closeMobileMenu()">Contacto</a>
+    </nav>
 
     <section class="page-hero">
         <div class="hero-inner">
@@ -277,7 +245,6 @@
         <div class="container">
             <div class="contacto-grid">
 
-                <!-- ASIDE -->
                 <aside class="contacto-aside">
                     <div class="aside-intro">
                         <span class="aside-label">// Ponte en contacto</span>
@@ -315,7 +282,6 @@
                     </div>
                 </aside>
 
-                <!-- FORMULARIO -->
                 <div class="form-card">
                     <h3>Envía tu mensaje</h3>
                     <form action="https://formspree.io/f/mvzwyynv" method="POST">
@@ -372,5 +338,21 @@
         </div>
     </footer>
 
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            hamburger.classList.toggle('open', isOpen);
+            hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+        });
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('open');
+        }
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobileMenu();
+        });
+    </script>
 </body>
 </html>

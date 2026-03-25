@@ -48,255 +48,167 @@
         header nav a:hover { color: var(--naranja); background: rgba(215,128,47,0.08); }
         header nav a.active { color: var(--naranja); }
 
-        /* HERO — con imagen de fondo */
+        /* HAMBURGER */
+        .hamburger {
+            display: none; flex-direction: column; justify-content: center;
+            gap: 5px; width: 40px; height: 40px;
+            background: none; border: 1px solid var(--gris-borde);
+            border-radius: 8px; cursor: pointer; padding: 8px;
+            transition: border-color 0.2s; z-index: 101;
+        }
+        .hamburger:hover { border-color: rgba(215,128,47,0.5); }
+        .hamburger span { display: block; height: 2px; background: var(--blanco); border-radius: 2px; transition: transform 0.3s, opacity 0.3s, background 0.2s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--naranja); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--naranja); }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            display: none; position: fixed;
+            top: 70px; left: 0; right: 0;
+            background: rgba(8,8,8,0.97); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gris-borde);
+            padding: 20px 24px 28px; flex-direction: column; gap: 4px;
+            z-index: 99; transform: translateY(-10px); opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .mobile-menu.open { display: flex; transform: translateY(0); opacity: 1; }
+        .mobile-menu a {
+            font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            padding: 14px 16px; border-radius: 8px; letter-spacing: 1px;
+            text-transform: uppercase; border: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--naranja); border-color: rgba(215,128,47,0.25); background: rgba(215,128,47,0.06); }
+        .mobile-menu a.active { color: var(--naranja); }
+
+        /* HERO */
         .page-hero {
-            min-height: 55vh;
-            display: flex; align-items: flex-end;
-            padding: 0 0 60px;
-            position: relative;
-            overflow: hidden;
+            min-height: 55vh; display: flex; align-items: flex-end;
+            padding: 0 0 60px; position: relative; overflow: hidden;
             background-image:
                 linear-gradient(135deg, rgba(0,0,0,0.80), rgba(0,0,0,0.60)),
                 url(../img/expo5.jpg.jpeg);
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
+            background-size: cover; background-position: center center; background-attachment: fixed;
         }
-
         .page-hero::before {
-            content: '';
-            position: absolute; inset: 0;
+            content: ''; position: absolute; inset: 0;
             background-image:
                 linear-gradient(rgba(215,128,47,0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(215,128,47,0.03) 1px, transparent 1px);
             background-size: 50px 50px;
         }
-
-        .hero-inner {
-            position: relative; z-index: 1;
-            max-width: 1280px; margin: 0 auto; padding: 0 32px;
-            width: 100%;
-        }
-
+        .hero-inner { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; }
         .hero-badge {
-            font-family: var(--font-mono); font-size: 11px;
-            color: var(--naranja); letter-spacing: 3px; text-transform: uppercase;
+            font-family: var(--font-mono); font-size: 11px; color: var(--naranja);
+            letter-spacing: 3px; text-transform: uppercase;
             border: 1px solid rgba(215,128,47,0.35); padding: 6px 14px;
             border-radius: 2px; display: inline-block; margin-bottom: 20px;
         }
-
-        .page-hero h1 {
-            font-size: clamp(40px, 7vw, 80px);
-            font-weight: 800; letter-spacing: -2px; line-height: 1;
-        }
-
+        .page-hero h1 { font-size: clamp(40px, 7vw, 80px); font-weight: 800; letter-spacing: -2px; line-height: 1; }
         .page-hero h1 span { color: var(--naranja); }
 
         /* CONTENIDO */
         .sobre-body { padding: 80px 0 100px; }
 
         .sobre-grid {
-            display: grid;
-            grid-template-columns: 340px 1fr;
-            gap: 60px;
-            align-items: start;
+            display: grid; grid-template-columns: 340px 1fr;
+            gap: 60px; align-items: start;
         }
 
-        /* Columna izquierda — foto + datos */
         .sobre-aside { position: sticky; top: 90px; }
 
-        .foto-wrap {
-            position: relative;
-            margin-bottom: 28px;
-        }
-
+        .foto-wrap { position: relative; margin-bottom: 28px; }
         .foto-wrap img {
-            width: 100%;
-            border-radius: 12px;
-            object-fit: cover;
-            object-position: center top;
-            aspect-ratio: 3/4;
-            display: block;
-            border: 1px solid var(--gris-borde);
+            width: 100%; border-radius: 12px; object-fit: cover;
+            object-position: center top; aspect-ratio: 3/4;
+            display: block; border: 1px solid var(--gris-borde);
         }
-
         .foto-wrap::after {
-            content: '';
-            position: absolute;
+            content: ''; position: absolute;
             bottom: -6px; right: -6px;
             width: 100%; height: 100%;
-            border: 2px solid var(--naranja);
-            border-radius: 12px;
-            z-index: -1;
-            opacity: 0.4;
+            border: 2px solid var(--naranja); border-radius: 12px;
+            z-index: -1; opacity: 0.4;
         }
 
         .dato-lista { display: flex; flex-direction: column; gap: 12px; }
-
         .dato-item {
             display: flex; flex-direction: column; gap: 2px;
-            padding: 14px 16px;
-            background: var(--gris-mid);
-            border: 1px solid var(--gris-borde);
-            border-radius: 8px;
-            transition: border-color 0.2s;
+            padding: 14px 16px; background: var(--gris-mid);
+            border: 1px solid var(--gris-borde); border-radius: 8px; transition: border-color 0.2s;
         }
-
         .dato-item:hover { border-color: rgba(215,128,47,0.3); }
+        .dato-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--naranja); opacity: 0.75; }
+        .dato-valor { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
 
-        .dato-label {
-            font-family: var(--font-mono); font-size: 10px;
-            letter-spacing: 2px; text-transform: uppercase;
-            color: var(--naranja); opacity: 0.75;
-        }
-
-        .dato-valor {
-            font-size: 14px; font-weight: 600;
-            color: rgba(255,255,255,0.85);
-        }
-
-        /* Columna derecha — texto */
         .sobre-content { display: flex; flex-direction: column; gap: 48px; }
-
         .sobre-block { display: flex; flex-direction: column; gap: 16px; }
-
-        .block-label {
-            font-family: var(--font-mono); font-size: 11px;
-            letter-spacing: 3px; text-transform: uppercase;
-            color: var(--naranja); opacity: 0.75;
-        }
-
-        .block-title {
-            font-size: clamp(22px, 3vw, 32px);
-            font-weight: 800; letter-spacing: -0.5px;
-            line-height: 1.2;
-        }
-
-        .block-text {
-            font-size: 15px; line-height: 1.8;
-            color: rgba(255,255,255,0.6);
-        }
-
+        .block-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--naranja); opacity: 0.75; }
+        .block-title { font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
+        .block-text { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.6); }
         .block-text + .block-text { margin-top: 8px; }
 
-        /* Timeline de educación */
         .timeline { display: flex; flex-direction: column; gap: 0; }
-
-        .tl-item {
-            display: grid;
-            grid-template-columns: 24px 1fr;
-            gap: 0 20px;
-            padding-bottom: 32px;
-            position: relative;
-        }
-
+        .tl-item { display: grid; grid-template-columns: 24px 1fr; gap: 0 20px; padding-bottom: 32px; }
         .tl-item:last-child { padding-bottom: 0; }
-
-        .tl-line {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .tl-dot {
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            background: var(--naranja);
-            flex-shrink: 0;
-            margin-top: 6px;
-            box-shadow: 0 0 0 3px rgba(215,128,47,0.15);
-        }
-
-        .tl-connector {
-            width: 1px;
-            flex: 1;
-            background: var(--gris-borde);
-            margin-top: 6px;
-        }
-
+        .tl-line { display: flex; flex-direction: column; align-items: center; }
+        .tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--naranja); flex-shrink: 0; margin-top: 6px; box-shadow: 0 0 0 3px rgba(215,128,47,0.15); }
+        .tl-connector { width: 1px; flex: 1; background: var(--gris-borde); margin-top: 6px; }
         .tl-item:last-child .tl-connector { display: none; }
-
-        .tl-card {
-            background: var(--gris-mid);
-            border: 1px solid var(--gris-borde);
-            border-radius: 10px;
-            padding: 20px 22px;
-            transition: border-color 0.2s;
-        }
-
+        .tl-card { background: var(--gris-mid); border: 1px solid var(--gris-borde); border-radius: 10px; padding: 20px 22px; transition: border-color 0.2s; }
         .tl-card:hover { border-color: rgba(215,128,47,0.3); }
+        .tl-titulo { font-size: 15px; font-weight: 700; color: var(--blanco); margin-bottom: 4px; }
+        .tl-inst { font-family: var(--font-mono); font-size: 12px; color: var(--naranja); margin-bottom: 8px; letter-spacing: 0.5px; }
+        .tl-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
 
-        .tl-titulo {
-            font-size: 15px; font-weight: 700;
-            color: var(--blanco); margin-bottom: 4px;
-        }
-
-        .tl-inst {
-            font-family: var(--font-mono); font-size: 12px;
-            color: var(--naranja); margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        .tl-desc {
-            font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6;
-        }
-
-        /* Competencias pills */
         .pills { display: flex; flex-wrap: wrap; gap: 8px; }
-
         .pill {
             font-family: var(--font-mono); font-size: 11px;
-            background: rgba(215,128,47,0.1);
-            color: var(--naranja);
+            background: rgba(215,128,47,0.1); color: var(--naranja);
             padding: 6px 14px; border-radius: 20px;
-            border: 1px solid rgba(215,128,47,0.2);
-            letter-spacing: 0.5px;
-            transition: background 0.2s;
+            border: 1px solid rgba(215,128,47,0.2); letter-spacing: 0.5px; transition: background 0.2s;
         }
-
         .pill:hover { background: rgba(215,128,47,0.2); }
 
-        /* CTA */
         .btn-primary {
             background: var(--naranja); color: #fff;
             font-family: var(--font-mono); font-size: 13px; font-weight: 700;
             letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
             padding: 14px 32px; border-radius: 6px; border: none; cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            display: inline-block;
+            transition: background 0.2s, transform 0.2s; display: inline-block;
             box-shadow: 0 6px 24px rgba(215,128,47,0.25);
         }
-
         .btn-primary:hover { background: var(--naranja-vivo); transform: translateY(-3px); }
 
         /* FOOTER */
-        #footer {
-            background: var(--gris-oscuro);
-            border-top: 1px solid var(--gris-borde);
-            padding: 48px 32px;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        #footer .container {
-            display: flex; justify-content: space-between;
-            align-items: center; flex-wrap: wrap; gap: 20px;
-        }
-
+        #footer { background: var(--gris-oscuro); border-top: 1px solid var(--gris-borde); padding: 48px 32px; display: flex; align-items: center; justify-content: center; }
+        #footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .footer-info { display: flex; flex-direction: column; gap: 4px; }
         .footer-info h3 { font-size: 18px; font-weight: 700; }
         .footer-info a { font-family: var(--font-mono); font-size: 12px; color: var(--naranja); text-decoration: none; }
         .footer-info p { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.3); }
         .footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
 
+        /* RESPONSIVE */
         @media (max-width: 900px) {
+            header { padding: 0 20px; }
+            header nav { display: none; }
+            .hamburger { display: flex; }
             .sobre-grid { grid-template-columns: 1fr; }
             .sobre-aside { position: static; }
             .foto-wrap img { aspect-ratio: 1/1; max-width: 320px; }
-            header { padding: 0 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero { background-attachment: scroll; }
+            .logo-texto { display: none; }
         }
 
         @media (max-width: 600px) {
-            header nav a { font-size: 11px; padding: 7px 8px; }
+            .foto-wrap img { max-width: 240px; }
+            .container { padding: 0 20px; }
         }
     </style>
 </head>
@@ -314,9 +226,19 @@
             <a href="./proyectos.html">Proyectos</a>
             <a href="./contacto.html">Contacto</a>
         </nav>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+            <span></span><span></span><span></span>
+        </button>
     </header>
 
-    <!-- HERO -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="../index.html" onclick="closeMobileMenu()">Inicio</a>
+        <a href="./sobre_nosotros.html" class="active" onclick="closeMobileMenu()">Sobre Mí</a>
+        <a href="./servicios.html" onclick="closeMobileMenu()">Servicios</a>
+        <a href="./proyectos.html" onclick="closeMobileMenu()">Proyectos</a>
+        <a href="./contacto.html" onclick="closeMobileMenu()">Contacto</a>
+    </nav>
+
     <section class="page-hero">
         <div class="hero-inner">
             <span class="hero-badge">// Sobre mí</span>
@@ -324,39 +246,22 @@
         </div>
     </section>
 
-    <!-- BODY -->
     <section class="sobre-body">
         <div class="container">
             <div class="sobre-grid">
-
-                <!-- ASIDE -->
                 <aside class="sobre-aside">
                     <div class="foto-wrap">
                         <img src="../img/fotoPerfil.png" alt="Enrique Corpus Bejarano">
                     </div>
                     <div class="dato-lista">
-                        <div class="dato-item">
-                            <span class="dato-label">Nombre</span>
-                            <span class="dato-valor">Enrique Corpus Bejarano</span>
-                        </div>
-                        <div class="dato-item">
-                            <span class="dato-label">Rol</span>
-                            <span class="dato-valor">Desarrollador de Software</span>
-                        </div>
-                        <div class="dato-item">
-                            <span class="dato-label">Correo</span>
-                            <span class="dato-valor">corpus.dev@gmail.com</span>
-                        </div>
-                        <div class="dato-item">
-                            <span class="dato-label">Estado</span>
-                            <span class="dato-valor">Disponible para proyectos</span>
-                        </div>
+                        <div class="dato-item"><span class="dato-label">Nombre</span><span class="dato-valor">Enrique Corpus Bejarano</span></div>
+                        <div class="dato-item"><span class="dato-label">Rol</span><span class="dato-valor">Desarrollador de Software</span></div>
+                        <div class="dato-item"><span class="dato-label">Correo</span><span class="dato-valor">corpus.dev@gmail.com</span></div>
+                        <div class="dato-item"><span class="dato-label">Estado</span><span class="dato-valor">Disponible para proyectos</span></div>
                     </div>
                 </aside>
 
-                <!-- CONTENT -->
                 <div class="sobre-content">
-
                     <div class="sobre-block">
                         <span class="block-label">// 01 — Quién soy</span>
                         <h2 class="block-title">Desarrollador enfocado en soluciones claras y funcionales</h2>
@@ -369,10 +274,7 @@
                         <h2 class="block-title">Educación</h2>
                         <div class="timeline">
                             <div class="tl-item">
-                                <div class="tl-line">
-                                    <div class="tl-dot"></div>
-                                    <div class="tl-connector"></div>
-                                </div>
+                                <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
                                 <div class="tl-card">
                                     <p class="tl-titulo">Técnico Laboral en Desarrollo de Software</p>
                                     <p class="tl-inst">Campuslands</p>
@@ -380,10 +282,7 @@
                                 </div>
                             </div>
                             <div class="tl-item">
-                                <div class="tl-line">
-                                    <div class="tl-dot"></div>
-                                    <div class="tl-connector"></div>
-                                </div>
+                                <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
                                 <div class="tl-card">
                                     <p class="tl-titulo">Licenciatura en Educación Básica</p>
                                     <p class="tl-inst">Universidad de Pamplona</p>
@@ -412,13 +311,11 @@
                     </div>
 
                     <a href="./contacto.html" class="btn-primary">Trabajemos juntos →</a>
-
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer id="footer">
         <div class="container">
             <div class="footer-info">
@@ -430,5 +327,21 @@
         </div>
     </footer>
 
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            hamburger.classList.toggle('open', isOpen);
+            hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+        });
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('open');
+        }
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobileMenu();
+        });
+    </script>
 </body>
 </html>

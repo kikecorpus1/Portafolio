@@ -48,6 +48,41 @@
         header nav a:hover { color: var(--naranja); background: rgba(215,128,47,0.08); }
         header nav a.active { color: var(--naranja); }
 
+        /* HAMBURGER */
+        .hamburger {
+            display: none; flex-direction: column; justify-content: center;
+            gap: 5px; width: 40px; height: 40px;
+            background: none; border: 1px solid var(--gris-borde);
+            border-radius: 8px; cursor: pointer; padding: 8px;
+            transition: border-color 0.2s; z-index: 101;
+        }
+        .hamburger:hover { border-color: rgba(215,128,47,0.5); }
+        .hamburger span { display: block; height: 2px; background: var(--blanco); border-radius: 2px; transition: transform 0.3s, opacity 0.3s, background 0.2s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--naranja); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--naranja); }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            display: none; position: fixed;
+            top: 70px; left: 0; right: 0;
+            background: rgba(8,8,8,0.97); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gris-borde);
+            padding: 20px 24px 28px; flex-direction: column; gap: 4px;
+            z-index: 99; transform: translateY(-10px); opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .mobile-menu.open { display: flex; transform: translateY(0); opacity: 1; }
+        .mobile-menu a {
+            font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            padding: 14px 16px; border-radius: 8px; letter-spacing: 1px;
+            text-transform: uppercase; border: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--naranja); border-color: rgba(215,128,47,0.25); background: rgba(215,128,47,0.06); }
+        .mobile-menu a.active { color: var(--naranja); }
+
         /* HERO */
         .page-hero {
             min-height: 55vh; display: flex; align-items: flex-end;
@@ -78,84 +113,47 @@
         /* FILTROS */
         .proyectos-body { padding: 60px 0 100px; }
 
-        .filtros {
-            display: flex; gap: 8px; flex-wrap: wrap;
-            margin-bottom: 48px;
-        }
+        .filtros { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
 
         .filtro-btn {
             font-family: var(--font-mono); font-size: 11px; font-weight: 700;
             letter-spacing: 1px; text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
-            background: var(--gris-mid);
-            border: 1px solid var(--gris-borde);
-            padding: 8px 18px; border-radius: 4px; cursor: pointer;
-            transition: all 0.2s;
+            color: rgba(255,255,255,0.4); background: var(--gris-mid);
+            border: 1px solid var(--gris-borde); padding: 8px 18px;
+            border-radius: 4px; cursor: pointer; transition: all 0.2s;
         }
-
         .filtro-btn:hover { color: var(--naranja); border-color: rgba(215,128,47,0.3); }
         .filtro-btn.active { color: var(--naranja); border-color: var(--naranja); background: rgba(215,128,47,0.08); }
 
-        /* GRID PROYECTOS */
-        .proyectos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 20px;
-        }
+        /* GRID */
+        .proyectos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
 
         .proyecto-card {
-            background: var(--gris-mid);
-            border: 1px solid var(--gris-borde);
+            background: var(--gris-mid); border: 1px solid var(--gris-borde);
             border-radius: 14px; overflow: hidden;
             display: flex; flex-direction: column;
             transition: border-color 0.3s, transform 0.3s;
         }
-
-        .proyecto-card:hover {
-            border-color: rgba(215,128,47,0.35);
-            transform: translateY(-6px);
-        }
+        .proyecto-card:hover { border-color: rgba(215,128,47,0.35); transform: translateY(-6px); }
 
         .proyecto-img-box {
             width: 100%; height: 180px;
             display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 8px;
-            font-size: 52px; position: relative; overflow: hidden;
+            align-items: center; justify-content: center;
+            gap: 8px; font-size: 52px;
+            position: relative; overflow: hidden;
         }
+        .proyecto-img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .proyecto-img-box img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
+        .proyecto-stack-tag { font-family: var(--font-mono); font-size: 11px; color: var(--naranja); font-weight: 700; letter-spacing: 1px; }
 
-        .proyecto-stack-tag {
-            font-family: var(--font-mono); font-size: 11px;
-            color: var(--naranja); font-weight: 700; letter-spacing: 1px;
-        }
-
-        .proyecto-body {
-            padding: 22px 24px 24px;
-            display: flex; flex-direction: column; gap: 10px; flex: 1;
-        }
-
-        .proyecto-num {
-            font-family: var(--font-mono); font-size: 10px;
-            color: rgba(215,128,47,0.5); letter-spacing: 2px;
-        }
-
+        .proyecto-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+        .proyecto-num { font-family: var(--font-mono); font-size: 10px; color: rgba(215,128,47,0.5); letter-spacing: 2px; }
         .proyecto-titulo { font-size: 17px; font-weight: 700; color: var(--blanco); }
-
-        .proyecto-desc {
-            font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; flex: 1;
-        }
+        .proyecto-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; flex: 1; }
 
         .proyecto-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-
-        .badge {
-            font-family: var(--font-mono); font-size: 10px;
-            background: rgba(215,128,47,0.1); color: var(--naranja);
-            padding: 4px 10px; border-radius: 20px;
-            border: 1px solid rgba(215,128,47,0.2);
-        }
+        .badge { font-family: var(--font-mono); font-size: 10px; background: rgba(215,128,47,0.1); color: var(--naranja); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(215,128,47,0.2); }
 
         .proyecto-link {
             display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
@@ -165,17 +163,12 @@
             padding: 9px 18px; border-radius: 6px; width: fit-content;
             transition: background 0.2s, color 0.2s;
         }
-
         .proyecto-link:hover { background: var(--naranja); color: white; }
 
-        /* oculto por filtro */
         .proyecto-card.hidden { display: none; }
 
         /* FOOTER */
-        #footer {
-            background: var(--gris-oscuro); border-top: 1px solid var(--gris-borde);
-            padding: 48px 32px; display: flex; align-items: center; justify-content: center;
-        }
+        #footer { background: var(--gris-oscuro); border-top: 1px solid var(--gris-borde); padding: 48px 32px; display: flex; align-items: center; justify-content: center; }
         #footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .footer-info { display: flex; flex-direction: column; gap: 4px; }
         .footer-info h3 { font-size: 18px; font-weight: 700; }
@@ -183,9 +176,22 @@
         .footer-info p { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.3); }
         .footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
 
-        @media (max-width: 700px) {
-            .proyectos-grid { grid-template-columns: 1fr; }
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
             header { padding: 0 20px; }
+            header nav { display: none; }
+            .hamburger { display: flex; }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero { background-attachment: scroll; }
+            .logo-texto { display: none; }
+            .proyectos-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        }
+
+        @media (max-width: 600px) {
+            .proyectos-grid { grid-template-columns: 1fr; }
+            .container { padding: 0 20px; }
         }
     </style>
 </head>
@@ -203,7 +209,18 @@
             <a href="./proyectos.html" class="active">Proyectos</a>
             <a href="./contacto.html">Contacto</a>
         </nav>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+            <span></span><span></span><span></span>
+        </button>
     </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="../index.html" onclick="closeMobileMenu()">Inicio</a>
+        <a href="./sobre_nosotros.html" onclick="closeMobileMenu()">Sobre Mí</a>
+        <a href="./servicios.html" onclick="closeMobileMenu()">Servicios</a>
+        <a href="./proyectos.html" class="active" onclick="closeMobileMenu()">Proyectos</a>
+        <a href="./contacto.html" onclick="closeMobileMenu()">Contacto</a>
+    </nav>
 
     <section class="page-hero">
         <div class="hero-inner">
@@ -215,8 +232,6 @@
 
     <section class="proyectos-body">
         <div class="container">
-
-            <!-- Filtros -->
             <div class="filtros">
                 <button class="filtro-btn active" onclick="filtrar('todos', this)">Todos</button>
                 <button class="filtro-btn" onclick="filtrar('backend', this)">Backend</button>
@@ -229,7 +244,7 @@
 
                 <div class="proyecto-card" data-cat="backend">
                     <div class="proyecto-img-box" style="background:#1a1a2e;">
-                       <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="../img/logitrack.mp4" type="video/mp4"></video>
+                        <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="../img/logitrack.mp4" type="video/mp4"></video>
                         <span class="proyecto-stack-tag">Spring Boot · JWT · MySQL</span>
                     </div>
                     <div class="proyecto-body">
@@ -237,12 +252,9 @@
                         <h3 class="proyecto-titulo">LogiTrack — Gestión de Bodegas</h3>
                         <p class="proyecto-desc">Sistema backend para administración de bodegas con control de inventario, movimientos (entradas, salidas, traslados) y auditoría automática por usuario. Autenticación JWT y roles de acceso.</p>
                         <div class="proyecto-badges">
-                            <span class="badge">Spring Boot 3</span>
-                            <span class="badge">Java 17</span>
-                            <span class="badge">Spring Security</span>
-                            <span class="badge">JWT</span>
-                            <span class="badge">MySQL</span>
-                            <span class="badge">Swagger</span>
+                            <span class="badge">Spring Boot 3</span><span class="badge">Java 17</span>
+                            <span class="badge">Spring Security</span><span class="badge">JWT</span>
+                            <span class="badge">MySQL</span><span class="badge">Swagger</span>
                         </div>
                         <a href="https://github.com/kikecorpus1/GestionBodegas_SpringBoot" class="proyecto-link" target="_blank">Ver repositorio →</a>
                     </div>
@@ -258,11 +270,8 @@
                         <h3 class="proyecto-titulo">TecnoStore — Gestión de Celulares</h3>
                         <p class="proyecto-desc">Aplicación Java con conexión directa a MySQL. Gestiona inventario, clientes, ventas y reportes. Implementa Singleton, Prototype, Facade y DAO con Stream API y PreparedStatement.</p>
                         <div class="proyecto-badges">
-                            <span class="badge">Java</span>
-                            <span class="badge">JDBC</span>
-                            <span class="badge">MySQL</span>
-                            <span class="badge">Maven</span>
-                            <span class="badge">DAO Pattern</span>
+                            <span class="badge">Java</span><span class="badge">JDBC</span>
+                            <span class="badge">MySQL</span><span class="badge">Maven</span><span class="badge">DAO Pattern</span>
                         </div>
                         <a href="https://github.com/kikecorpus1/GestionVentaDeCelulares_Java" class="proyecto-link" target="_blank">Ver repositorio →</a>
                     </div>
@@ -276,13 +285,10 @@
                     <div class="proyecto-body">
                         <span class="proyecto-num">P-03</span>
                         <h3 class="proyecto-titulo">Pizzería Don Piccolo — BD Relacional</h3>
-                        <p class="proyecto-desc">Base de datos MySQL que automatiza operaciones de una pizzería: pedidos, precios, domicilios y control financiero. Toda la lógica de negocio en triggers encadenados, funciones y procedimientos almacenados.</p>
+                        <p class="proyecto-desc">Base de datos MySQL que automatiza operaciones de una pizzería: pedidos, precios, domicilios y control financiero. Toda la lógica en triggers encadenados, funciones y procedimientos almacenados.</p>
                         <div class="proyecto-badges">
-                            <span class="badge">MySQL 8</span>
-                            <span class="badge">Triggers</span>
-                            <span class="badge">Stored Procedures</span>
-                            <span class="badge">Functions</span>
-                            <span class="badge">Views</span>
+                            <span class="badge">MySQL 8</span><span class="badge">Triggers</span>
+                            <span class="badge">Stored Procedures</span><span class="badge">Functions</span><span class="badge">Views</span>
                         </div>
                         <a href="https://github.com/kikecorpus1/PizzeriaDonPiccolo_MYSQL" class="proyecto-link" target="_blank">Ver repositorio →</a>
                     </div>
@@ -296,13 +302,10 @@
                     <div class="proyecto-body">
                         <span class="proyecto-num">P-04</span>
                         <h3 class="proyecto-titulo">Campus Music — BD NoSQL</h3>
-                        <p class="proyecto-desc">Sistema MongoDB para gestión de escuelas de música con validaciones JSON Schema, Aggregation Pipeline para reportes analíticos, transacciones ACID multi-documento y control de acceso por roles.</p>
+                        <p class="proyecto-desc">Sistema MongoDB para gestión de escuelas de música con validaciones JSON Schema, Aggregation Pipeline, transacciones ACID multi-documento y control de acceso por roles.</p>
                         <div class="proyecto-badges">
-                            <span class="badge">MongoDB</span>
-                            <span class="badge">Aggregation</span>
-                            <span class="badge">ACID</span>
-                            <span class="badge">JSON Schema</span>
-                            <span class="badge">Roles</span>
+                            <span class="badge">MongoDB</span><span class="badge">Aggregation</span>
+                            <span class="badge">ACID</span><span class="badge">JSON Schema</span><span class="badge">Roles</span>
                         </div>
                         <a href="https://github.com/kikecorpus1/CampusMusic_MongoDB" class="proyecto-link" target="_blank">Ver repositorio →</a>
                     </div>
@@ -316,11 +319,9 @@
                     <div class="proyecto-body">
                         <span class="proyecto-num">P-05</span>
                         <h3 class="proyecto-titulo">Juego de Poker</h3>
-                        <p class="proyecto-desc">Juego de poker interactivo con lógica completa de evaluación de manos, gestión de apuestas y flujo de partida implementado en JavaScript vanilla.</p>
+                        <p class="proyecto-desc">Juego de poker interactivo con lógica completa de evaluación de manos, gestión de apuestas y flujo de partida en JavaScript vanilla.</p>
                         <div class="proyecto-badges">
-                            <span class="badge">JavaScript</span>
-                            <span class="badge">HTML</span>
-                            <span class="badge">CSS</span>
+                            <span class="badge">JavaScript</span><span class="badge">HTML</span><span class="badge">CSS</span>
                         </div>
                         <a href="https://kikecorpus1.github.io/JuegoDePoker_JavaScript" class="proyecto-link" target="_blank">Ver proyecto →</a>
                     </div>
@@ -336,9 +337,7 @@
                         <h3 class="proyecto-titulo">Buscador de Pokémon</h3>
                         <p class="proyecto-desc">Aplicación que consume la PokéAPI en tiempo real con filtros dinámicos, manejo de promesas y procesamiento asíncrono de datos JSON.</p>
                         <div class="proyecto-badges">
-                            <span class="badge">JavaScript</span>
-                            <span class="badge">API REST</span>
-                            <span class="badge">Async/Await</span>
+                            <span class="badge">JavaScript</span><span class="badge">API REST</span><span class="badge">Async/Await</span>
                         </div>
                         <a href="https://kikecorpus1.github.io/BuscadorDePokemones_JavaScript" class="proyecto-link" target="_blank">Ver proyecto →</a>
                     </div>
@@ -346,7 +345,7 @@
 
                 <div class="proyecto-card" data-cat="frontend">
                     <div class="proyecto-img-box" style="background:#001a12;">
-                       <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="../img/PlataformaLMS.mp4" type="video/mp4"></video>
+                        <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="../img/PlataformaLMS.mp4" type="video/mp4"></video>
                         <span class="proyecto-stack-tag">JavaScript · MockAPI</span>
                     </div>
                     <div class="proyecto-body">
@@ -354,9 +353,7 @@
                         <h3 class="proyecto-titulo">Plataforma LMS</h3>
                         <p class="proyecto-desc">Academia SWBAR400 — LMS funcional con gestión de cursos, docentes y estudiantes. Tres roles de usuario diferenciados, cada uno con su propio panel y funcionalidades.</p>
                         <div class="proyecto-badges">
-                            <span class="badge">JavaScript</span>
-                            <span class="badge">MockAPI</span>
-                            <span class="badge">CSS</span>
+                            <span class="badge">JavaScript</span><span class="badge">MockAPI</span><span class="badge">CSS</span>
                         </div>
                         <a href="https://kikecorpus1.github.io/PlatafotmaLMS_JavaScript" class="proyecto-link" target="_blank">Ver proyecto →</a>
                     </div>
@@ -386,7 +383,7 @@
         <div class="container">
             <div class="footer-info">
                 <h3>Enrique Corpus Bejarano</h3>
-                <a href="/cdn-cgi/l/email-protection#fa9995888a8f89d49e9f8cba9d979b9396d4999597"><span class="__cf_email__" data-cfemail="bdded2cfcdc8ce93d9d8cbfddad0dcd4d193ded2d0">[email&#160;protected]</span></a>
+                <a href="mailto:corpus.dev@gmail.com">corpus.dev@gmail.com</a>
                 <p>Desarrollador de Software</p>
             </div>
             <span class="footer-copy">© 2026 CORPUS DEV</span>
@@ -394,15 +391,26 @@
     </footer>
 
     <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            hamburger.classList.toggle('open', isOpen);
+            hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+        });
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('open');
+        }
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobileMenu();
+        });
+
         function filtrar(cat, btn) {
             document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             document.querySelectorAll('.proyecto-card').forEach(card => {
-                if (cat === 'todos' || card.dataset.cat === cat) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+                card.classList.toggle('hidden', cat !== 'todos' && card.dataset.cat !== cat);
             });
         }
     </script>

@@ -108,6 +108,80 @@
             background: rgba(215,128,47,0.08);
         }
 
+        /* ---- HAMBURGER ---- */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: 1px solid var(--gris-borde);
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 8px;
+            transition: border-color 0.2s;
+            z-index: 101;
+        }
+
+        .hamburger:hover { border-color: rgba(215,128,47,0.5); }
+
+        .hamburger span {
+            display: block;
+            height: 2px;
+            background: var(--blanco);
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s, background 0.2s;
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--naranja); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--naranja); }
+
+        /* ---- MOBILE MENU ---- */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px; left: 0; right: 0;
+            background: rgba(8,8,8,0.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gris-borde);
+            padding: 20px 24px 28px;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 99;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            padding: 14px 16px;
+            border-radius: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--naranja);
+            border-color: rgba(215,128,47,0.25);
+            background: rgba(215,128,47,0.06);
+        }
+
         /* ============================================================
            HERO / PERFIL
         ============================================================ */
@@ -128,7 +202,6 @@
             background-attachment: fixed;
         }
 
-        /* Overlay grid sutil encima de la foto */
         #perfil::before {
             content: '';
             position: absolute;
@@ -140,7 +213,6 @@
             pointer-events: none;
         }
 
-        /* Orbe central naranja suave */
         #perfil::after {
             content: '';
             position: absolute;
@@ -296,7 +368,7 @@
         }
 
         /* ============================================================
-           SECCIÓN: HÁBITOS (heredada, mínimos cambios)
+           SECCIÓN: HÁBITOS
         ============================================================ */
         #habitos-section {
             position: relative;
@@ -618,14 +690,6 @@
             margin-left: 2px;
         }
 
-        @media (max-width: 680px) {
-            .stack-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 400px) {
-            .stack-grid { grid-template-columns: 1fr; }
-        }
-
         /* ============================================================
            SECCIÓN: PROYECTOS DESTACADOS — CARRUSEL
         ============================================================ */
@@ -654,10 +718,7 @@
             font-family: var(--font-mono);
         }
 
-        /* ---- CARRUSEL ---- */
-        .carrusel-wrapper {
-            position: relative;
-        }
+        .carrusel-wrapper { position: relative; }
 
         .carrusel-track-outer {
             overflow: hidden;
@@ -786,7 +847,6 @@
             color: white;
         }
 
-        /* Controles carrusel */
         .carrusel-controles {
             display: flex;
             align-items: center;
@@ -913,25 +973,58 @@
         /* ============================================================
            RESPONSIVE
         ============================================================ */
+
+        /* ---- Tablets grandes (≤ 960px) ---- */
+        @media (max-width: 960px) {
+            .carrusel-track { padding: 0 20px; }
+            .proyecto-card { flex: 0 0 340px; }
+        }
+
+        /* ---- Tablets (≤ 900px) ---- */
         @media (max-width: 900px) {
             header { padding: 0 20px; }
-            header nav a { font-size: 11px; padding: 7px 10px; }
+
+            /* Ocultar nav desktop, mostrar hamburguesa */
+            header nav { display: none; }
+            .hamburger { display: flex; }
+
             .habitos-top { flex-direction: column; gap: 30px; }
             .habitos-titulo-bloque { flex: none; }
             .habitos-desc-bloque { padding-top: 0; }
             .habitos-stats { grid-template-columns: repeat(2, 1fr); }
             .sesiones-grid { grid-template-columns: repeat(2, 1fr); }
             .habitos-bottom { grid-template-columns: 1fr; }
-            .carrusel-track { padding: 0 20px; }
-            .proyecto-card { flex: 0 0 320px; }
         }
 
+        /* ---- Tablets medianas (≤ 768px) ---- */
+        @media (max-width: 768px) {
+            /* Quitar fixed background en iOS Safari */
+            #perfil { background-attachment: scroll; }
+
+            /* Ocultar logo texto para ganar espacio */
+            .logo-texto { display: none; }
+
+            .stack-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ---- Móviles (≤ 600px) ---- */
         @media (max-width: 600px) {
-            header nav { display: none; }
             .sesiones-grid { grid-template-columns: 1fr; }
             .stat-numero { font-size: 32px; }
-            .proyecto-card { flex: 0 0 280px; }
+            .proyecto-card { flex: 0 0 290px; }
             .carrusel-track { padding: 0 16px; }
+
+            .perfil-imagen { width: 130px; height: 130px; }
+            .descripcion-perfil { font-size: 15px; padding: 0 8px; }
+
+            .btn-primary, .btn-outline { padding: 13px 22px; font-size: 12px; }
+        }
+
+        /* ---- Móviles pequeños (≤ 400px) ---- */
+        @media (max-width: 400px) {
+            .stat-numero { font-size: 28px; }
+            .stack-grid { grid-template-columns: 1fr; }
+            .habitos-titulo { font-size: 32px; }
         }
     </style>
 </head>
@@ -950,7 +1043,21 @@
             <a href="./pages/proyectos.html">Proyectos</a>
             <a href="./pages/contacto.html">Contacto</a>
         </nav>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
+
+    <!-- MENÚ MÓVIL -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="./index.html" onclick="closeMobileMenu()">Inicio</a>
+        <a href="./pages/sobre_nosotros.html" onclick="closeMobileMenu()">Sobre Mí</a>
+        <a href="./pages/servicios.html" onclick="closeMobileMenu()">Servicios</a>
+        <a href="./pages/proyectos.html" onclick="closeMobileMenu()">Proyectos</a>
+        <a href="./pages/contacto.html" onclick="closeMobileMenu()">Contacto</a>
+    </nav>
 
     <!-- HERO -->
     <section id="perfil">
@@ -970,6 +1077,7 @@
             <span>Scroll</span>
         </div>
     </section>
+
     <!-- STACK POR CATEGORÍA -->
     <section id="lenguajes">
         <span class="section-label">// Stack Tecnológico</span>
@@ -1032,7 +1140,7 @@
         </div>
     </section>
 
-        <!-- PROYECTOS — CARRUSEL -->
+    <!-- PROYECTOS — CARRUSEL -->
     <section id="proyecto">
         <div class="proyectos-header">
             <span class="section-label">// Proyectos Destacados</span>
@@ -1047,8 +1155,8 @@
                     <!-- P1: LogiTrack -->
                     <div class="proyecto-card">
                         <div class="proyecto-imagen-box" style="background:#1a1a2e;">
-                            <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="./img/logitrack.mp4" type="video/mp4"></video>                           
-                             <span class="proyecto-stack">Spring Boot · JWT · MySQL</span>
+                            <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="./img/logitrack.mp4" type="video/mp4"></video>
+                            <span class="proyecto-stack">Spring Boot · JWT · MySQL</span>
                         </div>
                         <div class="proyecto-contenido">
                             <span class="proyecto-num">P-01</span>
@@ -1291,7 +1399,6 @@
         </div>
     </section>
 
-
     <!-- FOOTER -->
     <section id="contacto">
         <div class="container">
@@ -1305,6 +1412,30 @@
     </section>
 
     <script>
+        // ============================================================
+        // HAMBURGER MENU
+        // ============================================================
+        const hamburger   = document.getElementById('hamburger');
+        const mobileMenu  = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            hamburger.classList.toggle('open', isOpen);
+            hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('open');
+        }
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+
         // ============================================================
         // CARRUSEL
         // ============================================================
@@ -1322,11 +1453,11 @@
                 return card.offsetWidth + gap;
             };
 
-            const cards      = track.querySelectorAll('.proyecto-card');
-            const total      = cards.length;
-            const VISIBLE    = () => Math.max(1, Math.floor(track.parentElement.offsetWidth / CARD_WIDTH()));
-            let   current    = 0;
-            const maxIndex   = () => Math.max(0, total - VISIBLE());
+            const cards   = track.querySelectorAll('.proyecto-card');
+            const total   = cards.length;
+            const VISIBLE = () => Math.max(1, Math.floor(track.parentElement.offsetWidth / CARD_WIDTH()));
+            let   current = 0;
+            const maxIndex = () => Math.max(0, total - VISIBLE());
 
             // Crear dots
             let dots = [];
@@ -1354,7 +1485,7 @@
             // Touch / drag
             let startX = 0, isDragging = false;
             track.addEventListener('pointerdown', e => { startX = e.clientX; isDragging = true; });
-            window.addEventListener('pointermove', e => { if (!isDragging) return; });
+            window.addEventListener('pointermove', () => {});
             window.addEventListener('pointerup', e => {
                 if (!isDragging) return;
                 isDragging = false;
@@ -1362,7 +1493,6 @@
                 if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
             });
 
-            // Init
             goTo(0);
 
             // Autoplay
